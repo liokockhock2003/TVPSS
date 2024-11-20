@@ -19,16 +19,30 @@ body {
 	min-height: 100vh;
 }
 
+/* Logo styles */
+.logo {
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin-bottom: 2rem;
+	text-decoration: none;
+	padding: 1rem;
+	color: #333;
+}
+
+.logo:hover {
+	color: #9c27b0; /* Optional hover effect for logo */
+}
+
 /* Sidebar styles */
 .sidebar {
-	width: 250px;
+	width: 300px; /* Increased width */
 	background-color: white;
 	padding: 20px;
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .nav-item {
-	padding: 12px 16px;
+	padding: 15px 16px;
 	margin: 4px 0;
 	border-radius: 8px;
 	color: #666;
@@ -36,24 +50,14 @@ body {
 	display: flex;
 	align-items: center;
 	transition: all 0.3s ease;
-}
-
-.nav-item {
-	padding: 12px 16px;
-	margin: 4px 0;
-	border-radius: 8px;
-	color: #666;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	transition: all 0.3s ease;
+	font-size: 22px;
 	text-decoration: none; /* Added for links */
 }
 
 .nav-item:hover {
-	background-color: #f8f9fa;
-	text-decoration: none; /* Added for links */
-	color: #666;
+	padding: 10px;
+	background-color: #e1bee7; /* Light purple highlight */
+	color: #9c27b0; /* Purple text */
 }
 
 .nav-item.active {
@@ -64,6 +68,7 @@ body {
 .nav-item.active:hover {
 	color: white;
 }
+
 
 /* Main content styles */
 .main-content {
@@ -129,14 +134,7 @@ body {
 	vertical-align: middle;
 }
 
-/* Logo link style */
-.logo {
-	font-size: 1.5rem;
-	font-weight: bold;
-	margin-bottom: 2rem;
-	text-decoration: none;
-	color: #333;
-}
+
 </style>
 </head>
 <body>
