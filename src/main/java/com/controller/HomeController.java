@@ -24,6 +24,34 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/video-upload")
+	@ResponseBody()
+	public ModelAndView uploadVideo() {
+		ModelAndView modelAndView = new ModelAndView("uploadVideo");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/video-library-student")
+	@ResponseBody()
+	public ModelAndView videoLibraryStudent() {
+		ModelAndView modelAndView = new ModelAndView("videoLibraryStudent");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/video-library-teacher")
+	@ResponseBody()
+	public ModelAndView videoLibraryTeacher() {
+		ModelAndView modelAndView = new ModelAndView("videoLibraryTeacher");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/view-video")
+	@ResponseBody()
+	public ModelAndView viewVideo() {
+		ModelAndView modelAndView = new ModelAndView("viewVideo");
+		return modelAndView;
+	}
+	
 	@GetMapping("/") 
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView("crewResourcePage");
