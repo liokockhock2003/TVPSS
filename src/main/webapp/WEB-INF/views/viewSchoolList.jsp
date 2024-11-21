@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Activity - TVPSS</title>
+<title>TVPSS School List</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -69,6 +69,7 @@ body {
 	color: white;
 }
 
+
 /* Main content styles */
 .main-content {
 	flex: 1;
@@ -76,59 +77,34 @@ body {
 	background-color: white;
 }
 
-.form-container {
-	max-width: 600px;
-	margin: 0 auto;
+.search-bar {
+	width: 100%;
+	max-width: 400px;
+	padding: 8px 16px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin-bottom: 2rem;
+}
+
+/* Table styles */
+.content-card {
 	background: white;
 	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 	padding: 20px;
 }
 
-.form-container label {
-	display: block;
-	font-size: 16px;
-	margin-bottom: 5px;
-	font-weight: bold;
-}
-
-.form-container input, .form-container textarea {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 20px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-}
-
-.file-upload {
-	border: 2px dashed #ccc;
-	border-radius: 8px;
-	text-align: center;
-	padding: 20px;
-	margin-bottom: 20px;
-	cursor: pointer;
-	color: #666;
-}
-
-.file-upload:hover {
-	border-color: #9c27b0;
-	color: #9c27b0;
-}
-
-.form-container button {
-	display: inline-block;
-	padding: 10px 20px;
-	background-color: #6aa84f;
+.manage-btn {
+	background-color: #9c27b0;
 	color: white;
 	border: none;
+	padding: 6px 16px;
 	border-radius: 4px;
-	cursor: pointer;
-	font-size: 16px;
+	transition: background-color 0.3s ease;
 }
 
-.form-container button:hover {
-	background-color: #4f8b37;
+.manage-btn:hover {
+	background-color: #7b1fa2;
 }
 
 /* Header styles */
@@ -148,14 +124,17 @@ body {
 	background-color: #ddd;
 }
 
-.search-bar {
-	width: 100%;
-	max-width: 400px;
-	padding: 8px 16px;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	margin-bottom: 2rem;
+.table th {
+	color: #666;
+	font-weight: 500;
+	border-bottom: 2px solid #eee;
 }
+
+.table td {
+	vertical-align: middle;
+}
+
+
 </style>
 </head>
 <body>
@@ -163,8 +142,11 @@ body {
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
-
-			<a href="${pageContext.request.contextPath}/crew-resource"
+			
+			<a href="${pageContext.request.contextPath}/school-list"
+				class="nav-item ${currentPage == 'school-list' ? 'active' : ''}">
+				<span>🏫 School TVPSS Management</span>
+			</a> <a href="${pageContext.request.contextPath}/crew-resource"
 				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
 				<span>👥 Crew & Resource</span>
 			</a> <a href="${pageContext.request.contextPath}/video-validation"
@@ -182,6 +164,8 @@ body {
 			</a>
 		</div>
 
+
+		<!-- Main Content -->
 		<div class="main-content">
 			<!-- User Section -->
 			<div class="user-section">
@@ -190,46 +174,61 @@ body {
 			</div>
 
 			<!-- Search Bar -->
-			<!-- Search Bar -->
 			<input type="text" class="search-bar" placeholder="Search...">
 
-			<h4 class="mb-4">Add Activity</h4>
+			<h4 class="mb-4">School TVPSS Management</h4>
 
-			<!-- Main Content -->
-			<div class="form-container">
-				<form action="submitActivity.jsp" method="post"
-					enctype="multipart/form-data">
-					<!-- Upload Image Section -->
-					<label for="file-upload" class="file-upload" id="file-upload-label">
-						<input id="file-upload" type="file" name="image"
-						style="display: none;" accept="image/*">
-						<p>Upload Image</p>
-						<p style="font-size: small;">Select File</p>
-					</label>
+			<div class="content-card">
+				<h6 class="mb-4">List of School</h6>
 
-					<!-- Activity Details Section -->
-					<h5>Details</h5>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Code</th>
+							<th>School Name</th>
+							<th>Version</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${schools}" var="school" varStatus="status">
+							<tr>
+								<td>${status.code}</td>
+								<td>${school.name}</td>
+								<td>${school.version}</td>
+								<td>${school.status}</td>
+								<td>
+									<button class="manage-btn">View Details</button>
+								</td>
+							</tr>
+						</c:forEach>
 
-					<label for="title">Title (required)</label> <input type="text"
-						id="title" name="title" required> <label for="date">Date
-						(required)</label> <input type="date" id="date" name="date" required>
-
-					<label for="description">Description (required)</label>
-					<textarea id="description" name="description" rows="4" required></textarea>
-
-					<!-- Save Button -->
-					<button type="submit">Save</button>
-				</form>
+						<!-- Sample data (remove when using real data) -->
+						<tr>
+							<td>JB3003</td>
+							<td>Sekolah Kebangsaan Taman Bukit Dahlia</td>
+							<td>Version 2</td>
+							<td>Active</td>
+							<td>
+								<button class="manage-btn">View Details</button>
+							</td>
+						</tr>
+						<tr>
+							<td>JB3004</td>
+							<td>Sekolah Kebangsaan Taman Cendana</td>
+							<td>-</td>
+							<td>Not Active</td>
+							<td>
+								<button class="manage-btn">View Details</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 
-	<script>
-		// Add event listener to file upload label for better interaction
-		document.getElementById("file-upload-label").addEventListener("click", () => {
-			document.getElementById("file-upload").click();
-		});
-	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
