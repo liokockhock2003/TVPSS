@@ -19,6 +19,10 @@ body {
 	min-height: 100vh;
 }
 
+.main-content {
+	margin: 5px;
+}
+
 /* Logo styles */
 .logo {
 	font-size: 2.5rem;
@@ -61,14 +65,13 @@ body {
 }
 
 .nav-item.active {
-	background-color: #9c27b0;
-	color: white;
+	background-color: #e1bee7; /* Light purple highlight */
+	color: #9c27b0; /* Purple text */
 }
 
 .nav-item.active:hover {
 	color: white;
 }
-
 
 /* Main content styles */
 .main-content {
@@ -95,16 +98,22 @@ body {
 }
 
 .manage-btn {
-	background-color: #9c27b0;
-	color: white;
-	border: none;
-	padding: 6px 16px;
-	border-radius: 4px;
-	transition: background-color 0.3s ease;
+	display: inline-block; /* Ensures it behaves like a button */
+	background-color: #9c27b0; /* Purple background */
+	color: white; /* White text */
+	text-align: center; /* Center text */
+	text-decoration: none; /* Remove underline */
+	border: none; /* No border */
+	padding: 6px 16px; /* Adjust padding */
+	border-radius: 4px; /* Rounded corners */
+	transition: background-color 0.3s ease; /* Smooth hover effect */
+	font-size: 0.85rem; /* Adjust font size */
 }
 
 .manage-btn:hover {
-	background-color: #7b1fa2;
+	color: #ffffff;
+	background-color: #7b1fa2; /* Darker purple on hover */
+	text-decoration: none; /* Ensure no underline appears on hover */
 }
 
 /* Header styles */
@@ -124,17 +133,38 @@ body {
 	background-color: #ddd;
 }
 
+/* Table styles */
+.table {
+	border-radius: 8px; /* Rounded corners for the table */
+	overflow: hidden;
+	border-collapse: separate; /* Prevent border from being clipped */
+	margin-top: 20px;
+}
+
 .table th {
-	color: #666;
-	font-weight: 500;
-	border-bottom: 2px solid #eee;
+	color: #123;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #f5f5f5; /* Light hover effect */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color: #f9f9f9; /* Alternating row colors */
 }
 
 .table td {
 	vertical-align: middle;
+	font-size: 0.95rem;
 }
 
-
+.table .manage-btn {
+	padding: 8px 12px;
+	font-size: 0.85rem;
+}
 </style>
 </head>
 <body>
@@ -173,31 +203,31 @@ body {
 			<!-- Search Bar -->
 			<input type="text" class="search-bar" placeholder="Search...">
 
-			<h4 class="mb-4">Crew & Resource Management</h4>
+			<h3 class="mb-4">Crew & Resource Management</h3>
 
 			<div class="content-card">
-				<h6 class="mb-4">List of School</h6>
+				<h5 class="mb-4">List of School</h5>
 
-				<table class="table">
-					<thead>
+				<table class="table table-hover table-striped align-middle">
+					<thead class="table-light">
 						<tr>
-							<th>No.</th>
+							<th class="text-center">No.</th>
 							<th>School Name</th>
 							<th>Total Crew</th>
 							<th>Total Resources</th>
 							<th>Available Resources</th>
-							<th>Action</th>
+							<th class="text-center">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${schools}" var="school" varStatus="status">
 							<tr>
-								<td>${status.count}</td>
+								<td class="text-center">${status.count}</td>
 								<td>${school.name}</td>
 								<td>${school.totalCrew}</td>
 								<td>${school.totalResources}</td>
 								<td>${school.availableResources}</td>
-								<td>
+								<td class="text-center">
 									<button class="manage-btn">Manage</button>
 								</td>
 							</tr>
@@ -205,22 +235,43 @@ body {
 
 						<!-- Sample data (remove when using real data) -->
 						<tr>
-							<td>1.</td>
+							<td class="text-center">1.</td>
 							<td>Sekolah Kebangsaan Taman Bukit Dahlia</td>
 							<td>2</td>
 							<td>5</td>
 							<td>2</td>
-							<td>
-								<button class="manage-btn">Manage</button>
+							<td class="text-center"><a
+								href="${pageContext.request.contextPath}/manage-school?id=1"
+								class="manage-btn">Manage</a></td>
 							</td>
 						</tr>
 						<tr>
-							<td>2.</td>
+							<td class="text-center">2.</td>
 							<td>Sekolah Kebangsaan Taman Cendana</td>
 							<td>7</td>
 							<td>6</td>
 							<td>0</td>
-							<td>
+							<td class="text-center">
+								<button class="manage-btn">Manage</button>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center">3.</td>
+							<td>Sekolah Kebangsaan Taman Mawar</td>
+							<td>12</td>
+							<td>9</td>
+							<td>2</td>
+							<td class="text-center">
+								<button class="manage-btn">Manage</button>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center">4.</td>
+							<td>Sekolah Kebangsaan Taman Mesra</td>
+							<td>19</td>
+							<td>9</td>
+							<td>1</td>
+							<td class="text-center">
 								<button class="manage-btn">Manage</button>
 							</td>
 						</tr>
