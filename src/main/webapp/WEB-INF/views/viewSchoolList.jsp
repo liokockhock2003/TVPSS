@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TVPSS - Crew & Resource Management</title>
+<title>TVPSS School List</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -142,8 +142,11 @@ body {
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
-
-			<a href="${pageContext.request.contextPath}/crew-resource"
+			
+			<a href="${pageContext.request.contextPath}/school-list"
+				class="nav-item ${currentPage == 'school-list' ? 'active' : ''}">
+				<span>🏫 School TVPSS Management</span>
+			</a> <a href="${pageContext.request.contextPath}/crew-resource"
 				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
 				<span>👥 Crew & Resource</span>
 			</a> <a href="${pageContext.request.contextPath}/video-validation"
@@ -155,7 +158,7 @@ body {
 			</a> <a href="${pageContext.request.contextPath}/contacts"
 				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
 					Contacts</span>
-			</a> <a href="${pageContext.request.contextPath}/reports"
+			</a> <a href="viewReport"
 				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
 					Reports</span>
 			</a>
@@ -173,55 +176,49 @@ body {
 			<!-- Search Bar -->
 			<input type="text" class="search-bar" placeholder="Search...">
 
-			<h4 class="mb-4">Crew & Resource Management</h4>
-
 			<div class="content-card">
 				<h6 class="mb-4">List of School</h6>
 
 				<table class="table">
 					<thead>
 						<tr>
-							<th>No.</th>
+							<th>Code</th>
 							<th>School Name</th>
-							<th>Total Crew</th>
-							<th>Total Resources</th>
-							<th>Available Resources</th>
+							<th>Version</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${schools}" var="school" varStatus="status">
 							<tr>
-								<td>${status.count}</td>
+								<td>${status.code}</td>
 								<td>${school.name}</td>
-								<td>${school.totalCrew}</td>
-								<td>${school.totalResources}</td>
-								<td>${school.availableResources}</td>
+								<td>${school.version}</td>
+								<td>${school.status}</td>
 								<td>
-									<button class="manage-btn">Manage</button>
+									<button class="manage-btn">View Details</button>
 								</td>
 							</tr>
 						</c:forEach>
 
 						<!-- Sample data (remove when using real data) -->
 						<tr>
-							<td>1.</td>
+							<td>JB3003</td>
 							<td>Sekolah Kebangsaan Taman Bukit Dahlia</td>
-							<td>2</td>
-							<td>5</td>
-							<td>2</td>
+							<td>Version 2</td>
+							<td>Active</td>
 							<td>
-								<button class="manage-btn">Manage</button>
+								<button class="manage-btn">View Details</button>
 							</td>
 						</tr>
 						<tr>
-							<td>2.</td>
+							<td>JB3004</td>
 							<td>Sekolah Kebangsaan Taman Cendana</td>
-							<td>7</td>
-							<td>6</td>
-							<td>0</td>
+							<td>-</td>
+							<td>Not Active</td>
 							<td>
-								<button class="manage-btn">Manage</button>
+								<button class="manage-btn">View Details</button>
 							</td>
 						</tr>
 					</tbody>
