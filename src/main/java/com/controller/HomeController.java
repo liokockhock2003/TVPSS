@@ -51,6 +51,55 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView("viewVideo");
 		return modelAndView;
 	}
+
+	@RequestMapping("/dashboard")
+	@ResponseBody()
+	public ModelAndView activityDashboard() {
+		ModelAndView modelAndView = new ModelAndView("dashboard");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/createreport")
+	@ResponseBody()
+	public ModelAndView createReport() {
+		ModelAndView modelAndView = new ModelAndView("createreport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/AddActivity")
+	@ResponseBody()
+	public ModelAndView AddActivity() {
+		ModelAndView modelAndView = new ModelAndView("AddActivity");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/viewReport")
+	@ResponseBody()
+	public ModelAndView ViewReport() {
+		ModelAndView modelAndView = new ModelAndView("ViewReport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/joinactivity")
+	@ResponseBody()
+	public ModelAndView joinactivity() {
+		ModelAndView modelAndView = new ModelAndView("joinactivity");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/report")
+	@ResponseBody()
+	public ModelAndView viewReport() {
+		ModelAndView modelAndView = new ModelAndView("ViewReport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/forum")
+	@ResponseBody()
+	public ModelAndView forum() {
+		ModelAndView modelAndView = new ModelAndView("forum");
+		return modelAndView;
+	}
 	
 	@GetMapping("/") 
 	public ModelAndView home() {

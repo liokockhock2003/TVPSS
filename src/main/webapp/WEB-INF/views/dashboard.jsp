@@ -239,7 +239,10 @@ body {
 			</div>
 
 			<div class="footer">
-				<a href="http://localhost:8080/TVPSS-1/AddActivity" class="add-actvitiy">Add Activity</a>
+				<a href="AddActivity" class="add-actvitiy">Add Activity</a>
+			</div>
+			<div class="footer">
+				<a href="forum" class="add-actvitiy">Forum</a>
 			</div>
 		</div>
 	</div>
