@@ -10,6 +10,34 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class HomeController {
 	
+	@RequestMapping("/school-review")
+	@ResponseBody()
+	public ModelAndView schoolReview() {
+		ModelAndView modelAndView = new ModelAndView("viewAdminReview");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/school-submission")
+	@ResponseBody()
+	public ModelAndView schoolVersionCheck() {
+		ModelAndView modelAndView = new ModelAndView("viewVersionCheck");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/school-profile")
+	@ResponseBody()
+	public ModelAndView schoolProfile() {
+		ModelAndView modelAndView = new ModelAndView("viewSchoolProfile");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/school-list")
+	@ResponseBody()
+	public ModelAndView schoolList() {
+		ModelAndView modelAndView = new ModelAndView("viewSchoolList");
+		return modelAndView;
+	}
+	
 	@RequestMapping("/crew-resource")
 	@ResponseBody()
 	public ModelAndView crewResource() {
