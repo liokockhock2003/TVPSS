@@ -206,6 +206,26 @@ body {
 								<button class="delete-btn">Delete</button>
 							</td>
 						</tr>
+						<tr>
+							<td>2</td>
+							<td>Annual School Report</td>
+							<td>2024-11-01</td>
+							<td>A summary of the year's activities and achievements.</td>
+							<td>
+								<button class="edit-btn">Edit</button>
+								<button class="delete-btn">Delete</button>
+							</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>Annual School Report</td>
+							<td>2024-11-01</td>
+							<td>A summary of the year's activities and achievements.</td>
+							<td>
+								<button class="edit-btn">Edit</button>
+								<button class="delete-btn">Delete</button>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
