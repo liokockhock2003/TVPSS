@@ -28,32 +28,55 @@
             border-right: 1px solid #eee;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-item {
-            padding: 12px;
-            margin: 4px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-item:hover {
-            background-color: #f0f0f0;
-        }
-
-        .nav-item.active {
-            background-color: #f0f0f5;
-        }
+        /* Logo styles */
+		.logo {
+			font-size: 2.5rem;
+			font-weight: bold;
+			margin-bottom: 2rem;
+			text-decoration: none;
+			padding: 1rem;
+			color: #333;
+		}
+		
+		.logo:hover {
+			color: #9c27b0; /* Optional hover effect for logo */
+		}
+		
+		/* Sidebar styles */
+		.sidebar {
+			width: 300px; /* Increased width */
+			background-color: white;
+			padding: 20px;
+			box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+		}
+		
+		.nav-item {
+			padding: 15px 16px;
+			margin: 4px 0;
+			border-radius: 8px;
+			color: #666;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			transition: all 0.3s ease;
+			font-size: 22px;
+			text-decoration: none; /* Added for links */
+		}
+		
+		.nav-item:hover {
+			padding: 10px;
+			background-color: #e1bee7; /* Light purple highlight */
+			color: #9c27b0; /* Purple text */
+		}
+		
+		.nav-item.active {
+			background-color: #9c27b0;
+			color: white;
+		}
+		
+		.nav-item.active:hover {
+			color: white;
+		}
 
         /* Main Content Styles */
         .main-content {
@@ -252,11 +275,24 @@
         <div class="logo">
             <span>📺 TVPSS</span>
         </div>
-        <div class="nav-item">👥 Crew & Resource</div>
-        <div class="nav-item active">🎥 Video</div>
-        <div class="nav-item">💼 Deals</div>
-        <div class="nav-item">📞 Contacts</div>
-        <div class="nav-item">📊 Reports</div>
+        <a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
+
+			<a href="${pageContext.request.contextPath}/crew-resource"
+				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
+				<span>👥 Crew & Resource</span>
+			</a> <a href="${pageContext.request.contextPath}/video-validation"
+				class="nav-item ${currentPage == 'video-validation' ? 'active' : ''}">
+				<span>🎥 Video Validation</span>
+			</a> <a href="${pageContext.request.contextPath}/deals"
+				class="nav-item ${currentPage == 'deals' ? 'active' : ''}"> <span>💼
+					Deals</span>
+			</a> <a href="${pageContext.request.contextPath}/contacts"
+				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
+					Contacts</span>
+			</a> <a href="${pageContext.request.contextPath}/reports"
+				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
+					Reports</span>
+			</a>
     </div>
 
     <div class="main-content">

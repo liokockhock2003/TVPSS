@@ -35,12 +35,89 @@ public class HomeController {
         modelAndView.addObject("currentPage", "crew-resource");
         return modelAndView;
     }
+	
+	@RequestMapping("/video-upload")
+	@ResponseBody()
+	public ModelAndView uploadVideo() {
+		ModelAndView modelAndView = new ModelAndView("uploadVideo");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/video-library-student")
+	@ResponseBody()
+	public ModelAndView videoLibraryStudent() {
+		ModelAndView modelAndView = new ModelAndView("videoLibraryStudent");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/video-library-teacher")
+	@ResponseBody()
+	public ModelAndView videoLibraryTeacher() {
+		ModelAndView modelAndView = new ModelAndView("videoLibraryTeacher");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/view-video")
+	@ResponseBody()
+	public ModelAndView viewVideo() {
+		ModelAndView modelAndView = new ModelAndView("viewVideo");
+		return modelAndView;
+	}
 
-    @GetMapping("/")
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("loginPage");
-        modelAndView.addObject("message", "Welcome to the TVPSS app!");
-        modelAndView.addObject("currentPage", "home");
-        return modelAndView;
-    }
+	@RequestMapping("/dashboard")
+	@ResponseBody()
+	public ModelAndView activityDashboard() {
+		ModelAndView modelAndView = new ModelAndView("dashboard");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/createreport")
+	@ResponseBody()
+	public ModelAndView createReport() {
+		ModelAndView modelAndView = new ModelAndView("createreport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/AddActivity")
+	@ResponseBody()
+	public ModelAndView AddActivity() {
+		ModelAndView modelAndView = new ModelAndView("AddActivity");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/viewReport")
+	@ResponseBody()
+	public ModelAndView ViewReport() {
+		ModelAndView modelAndView = new ModelAndView("ViewReport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/joinactivity")
+	@ResponseBody()
+	public ModelAndView joinactivity() {
+		ModelAndView modelAndView = new ModelAndView("joinactivity");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/report")
+	@ResponseBody()
+	public ModelAndView viewReport() {
+		ModelAndView modelAndView = new ModelAndView("ViewReport");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/forum")
+	@ResponseBody()
+	public ModelAndView forum() {
+		ModelAndView modelAndView = new ModelAndView("forum");
+		return modelAndView;
+	}
+	
+	@GetMapping("/") 
+	public ModelAndView home() {
+		ModelAndView modelAndView = new ModelAndView("crewResourcePage");
+		modelAndView.addObject("message", "Welcome to the TVPSS app!");
+		return modelAndView;
+	}
 }
+
