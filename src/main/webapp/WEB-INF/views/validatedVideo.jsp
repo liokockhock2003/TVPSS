@@ -274,15 +274,16 @@
             
             <div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">
-					<li class="nav-item"><a class="nav-link active"
+					<li class="nav-item"><a class="nav-link"
 						href="validate-video">Pending Validation</a></li>
-					<li class="nav-item"><a class="nav-link" href="validated-video"">Validated Video</a></li>
+					<li class="nav-item"><a class="nav-link active" href="validated-video"">Validated Video</a></li>
 				</ul>
 			</div>
 
-            <!-- Video Validation Table -->
-            <section class="video-validation">
-                <h2>Video Validation</h2>
+
+<!-- Video Validation Table -->
+            <section class="validated-video">
+                <h2>Validated Video</h2>
                 <table>
                     <tr>
                         <th>No</th>
@@ -295,26 +296,26 @@
                         <td><img src="https://via.placeholder.com/200x120" class="video-thumbnail" alt="Video"></td>
                         <td><span>Build it in Figma: Create a design system — Components</span><br>SK Taman Bukit Dahlia</td>
                         <td class="action-buttons">
-                            <button class="btn btn-approve">Approve</button>
-                            <button class="btn btn-reject">Reject</button>
+                            <button class="btn btn-approve" disabled>Approved</button>
+                            <button class="btn btn-approve">Delete</button>
                         </td>
                     </tr>
                     <tr>
                         <td>2.</td>
                         <td><img src="https://via.placeholder.com/200x120" class="video-thumbnail" alt="Video"></td>
-                        <td>Build it in Figma: Create a design system — Foundations<br>SK Taman Bukit Dahlia</td>
+                        <td><span>Build it in Figma: Create a design system — Foundations</span><br>SK Taman Bukit Dahlia</td>
                         <td class="action-buttons">
-                            <button class="btn btn-approve">Approve</button>
-                            <button class="btn btn-reject">Reject</button>
+                            <button class="btn btn-approve" disabled>Approved</button>
+                            <button class="btn btn-approve">Delete</button>
                         </td>
                     </tr>
                     <tr>
                         <td>3.</td>
                         <td><img src="https://via.placeholder.com/200x120" class="video-thumbnail" alt="Video"></td>
-                        <td>Amelie Piano Soundtrack<br>SMJK Jit Sa</td>
+                        <td><span>Amelie Piano Soundtrack</span><br>SMJK Jit Sa</td>
                         <td class="action-buttons">
-                            <button class="btn btn-approve">Approve</button>
-                            <button class="btn btn-reject">Reject</button>
+                            <button class="btn btn-approve" disabled>Approved</button>
+                            <button class="btn btn-approve">Delete</button>
                         </td>
                     </tr>
                 </table>

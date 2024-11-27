@@ -53,10 +53,17 @@ public class HomeController {
     	return modelAndView;
     }
 
-    @RequestMapping("/video-validation")
+    @RequestMapping("/validate-video")
     public ModelAndView validateVideo() {
         ModelAndView modelAndView = new ModelAndView("validateVideo");
-        modelAndView.addObject("currentPage", "video-validation");
+        modelAndView.addObject("currentPage", "validate-video");
+        return modelAndView;
+    }
+    
+    @RequestMapping("/validated-video")
+    public ModelAndView validatedVideo() {
+        ModelAndView modelAndView = new ModelAndView("validatedVideo");
+        modelAndView.addObject("currentPage", "validated-video");
         return modelAndView;
     }
     
