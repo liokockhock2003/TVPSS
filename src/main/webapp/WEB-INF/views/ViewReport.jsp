@@ -206,6 +206,26 @@ body {
 								<button class="delete-btn">Delete</button>
 							</td>
 						</tr>
+						<tr>
+							<td>2</td>
+							<td>Admin Report</td>
+							<td>2023-11-01</td>
+							<td>A summary of last year's activities and achievements.</td>
+							<td>
+								<button class="edit-btn">Edit</button>
+								<button class="delete-btn">Delete</button>
+							</td>
+						<tr>
+							<td>3</td>
+							<td>Competition Report</td>
+							<td>2024-05-14</td>
+							<td>A summary of competition leaderboard.</td>
+							<td>
+								<button class="edit-btn">Edit</button>
+								<button class="delete-btn">Delete</button>
+							</td>
+						</tr>
+						</tr>
 					</tbody>
 				</table>
 			</div>

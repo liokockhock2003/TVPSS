@@ -192,8 +192,8 @@ body {
 					<label for="description">Description (required)</label>
 					<textarea id="description" name="description" rows="4" required></textarea>
 
-					<label for="file-upload">Select File</label>
-					<input id="file-upload" type="file" name="file">
+					<!--<label for="file-upload">Select File</label>
+					<input id="file-upload" type="file" name="file">  -->
 
 					<button type="submit">Save</button>
 				</form>

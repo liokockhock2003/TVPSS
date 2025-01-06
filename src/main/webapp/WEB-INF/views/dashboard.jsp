@@ -190,7 +190,7 @@ body {
 			</a> <a href="${pageContext.request.contextPath}/contacts"
 				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
 					Contacts</span>
-			</a> <a href="${pageContext.request.contextPath}/reports"
+			</a> <a href="viewReport"
 				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
 					Reports</span>
 			</a>
@@ -215,7 +215,7 @@ body {
 				<div class="competition-card">
 					<img
 						src="https://one-hbs.com/wp-content/uploads/2021/11/250356943_2021610551339967_5516846616685059832_n.jpg"
-						alt="Competition 1"> <a href="viewReport" class="card-link">click
+						alt="Competition 1"> <a href="createreport" class="card-link">click
 						here</a>
 				</div>
 				<div class="competition-card">
