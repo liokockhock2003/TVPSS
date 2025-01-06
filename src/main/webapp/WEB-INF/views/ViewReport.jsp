@@ -231,10 +231,7 @@ body {
 			</div>
 		</div>
 	</div>
-
 	<script>
-		function editReport(id) {
-			// Redirect to the edit report page
 			window.location.href = `${pageContext.request.contextPath}/edit-report?id=` + id;
 		}
 

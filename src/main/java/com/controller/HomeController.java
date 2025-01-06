@@ -1,28 +1,78 @@
 package com.controller;
 
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-@Controller
 
+@Controller
 public class HomeController {
 	
-	@RequestMapping("/crew-resource")
+	@RequestMapping("/school-review")
 	@ResponseBody()
-	public ModelAndView crewResource() {
-		ModelAndView modelAndView = new ModelAndView("crewResourcePage");
+	public ModelAndView schoolReview() {
+		ModelAndView modelAndView = new ModelAndView("viewAdminReview");
 		return modelAndView;
 	}
 	
-	@RequestMapping("/video-validation")
+	@RequestMapping("/school-submission")
 	@ResponseBody()
-	public ModelAndView validateVideo() {
-		ModelAndView modelAndView = new ModelAndView("validateVideo");
+	public ModelAndView schoolVersionCheck() {
+		ModelAndView modelAndView = new ModelAndView("viewVersionCheck");
 		return modelAndView;
 	}
+	
+	@RequestMapping("/school-profile")
+	@ResponseBody()
+	public ModelAndView schoolProfile() {
+		ModelAndView modelAndView = new ModelAndView("viewSchoolProfile");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/school-list")
+	@ResponseBody()
+	public ModelAndView schoolList() {
+		ModelAndView modelAndView = new ModelAndView("viewSchoolList");
+		return modelAndView;
+	}
+	
+	
+
+    @RequestMapping("/crew-resource")
+    public ModelAndView crewResource() {
+        ModelAndView modelAndView = new ModelAndView("crewResourcePage");
+        modelAndView.addObject("currentPage", "crew-resource");
+        return modelAndView;
+    }
+    
+    @RequestMapping("manage-school")
+    public ModelAndView manageSchool() {
+    	ModelAndView modelAndView = new ModelAndView("manageSchoolPage");
+    	modelAndView.addObject("currentPage", "crew-resource");
+    	return modelAndView;
+    }
+
+    @RequestMapping("/validate-video")
+    public ModelAndView validateVideo() {
+        ModelAndView modelAndView = new ModelAndView("validateVideo");
+        modelAndView.addObject("currentPage", "validate-video");
+        return modelAndView;
+    }
+    
+    @RequestMapping("/validated-video")
+    public ModelAndView validatedVideo() {
+        ModelAndView modelAndView = new ModelAndView("validatedVideo");
+        modelAndView.addObject("currentPage", "validated-video");
+        return modelAndView;
+    }
+    
+    @RequestMapping("/resource-page")
+    public ModelAndView resourcePage() {
+        ModelAndView modelAndView = new ModelAndView("resourcePage");
+        modelAndView.addObject("currentPage", "crew-resource");
+        return modelAndView;
+    }
 	
 	@RequestMapping("/video-upload")
 	@ResponseBody()
@@ -108,3 +158,4 @@ public class HomeController {
 		return modelAndView;
 	}
 }
+
