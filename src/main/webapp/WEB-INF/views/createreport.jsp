@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Create Report - TVPSS</title>
+<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -147,26 +148,7 @@ body {
 <body>
 	<div class="main-container">
 		<!-- Sidebar -->
-		<div class="sidebar">
-			<a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
-
-			<a href="${pageContext.request.contextPath}/crew-resource"
-				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
-				<span>👥 Crew & Resource</span>
-			</a> <a href="${pageContext.request.contextPath}/video-validation"
-				class="nav-item ${currentPage == 'video-validation' ? 'active' : ''}">
-				<span>🎥 Video Validation</span>
-			</a> <a href="${pageContext.request.contextPath}/deals"
-				class="nav-item ${currentPage == 'deals' ? 'active' : ''}"> <span>💼
-					Deals</span>
-			</a> <a href="${pageContext.request.contextPath}/contacts"
-				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
-					Contacts</span>
-			</a> <a href="${pageContext.request.contextPath}/reports"
-				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
-					Reports</span>
-			</a>
-		</div>
+		<jsp:include page="/WEB-INF/views/sidebar/sidebarTeacher.jsp" />
 
 		<!-- Main Content -->
 		<div class="main-content">

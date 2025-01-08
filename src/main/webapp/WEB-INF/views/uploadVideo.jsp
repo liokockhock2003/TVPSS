@@ -1,398 +1,371 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TVPSS - Video Management</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TVPSS - Video Management</title>
+<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, sans-serif;
+}
 
-        body {
-            display: flex;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-        }
+body {
+	display: flex;
+	min-height: 100vh;
+	background-color: #f5f5f5;
+}
 
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background-color: white;
-            padding: 20px;
-            border-right: 1px solid #eee;
-        }
 
-        /* Logo styles */
-		.logo {
-			font-size: 2.5rem;
-			font-weight: bold;
-			margin-bottom: 2rem;
-			text-decoration: none;
-			padding: 1rem;
-			color: #333;
-		}
-		
-		.logo:hover {
-			color: #9c27b0; /* Optional hover effect for logo */
-		}
-		
-		/* Sidebar styles */
-		.sidebar {
-			width: 300px; /* Increased width */
-			background-color: white;
-			padding: 20px;
-			box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-		}
-		
-		.nav-item {
-			padding: 15px 16px;
-			margin: 4px 0;
-			border-radius: 8px;
-			color: #666;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			transition: all 0.3s ease;
-			font-size: 22px;
-			text-decoration: none; /* Added for links */
-		}
-		
-		.nav-item:hover {
-			padding: 10px;
-			background-color: #e1bee7; /* Light purple highlight */
-			color: #9c27b0; /* Purple text */
-		}
-		
-		.nav-item.active {
-			background-color: #9c27b0;
-			color: white;
-		}
-		
-		.nav-item.active:hover {
-			color: white;
-		}
+/* Logo styles */
+.logo {
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin-bottom: 2rem;
+	text-decoration: none;
+	padding: 1rem;
+	color: #333;
+}
 
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            display: flex;
-            gap: 30px;
-        }
+.logo:hover {
+	color: #9c27b0; /* Optional hover effect for logo */
+}
 
-        .content-left {
-            flex: 1;
-        }
+/* Sidebar styles */
+.sidebar {
+	width: 300px; /* Increased width */
+	background-color: white;
+	padding: 20px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
 
-        .content-right {
-            width: 300px;
-        }
+.nav-item {
+	padding: 15px 16px;
+	margin: 4px 0;
+	border-radius: 8px;
+	color: #666;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	transition: all 0.3s ease;
+	font-size: 22px;
+	text-decoration: none; /* Added for links */
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+.nav-item:hover {
+	padding: 10px;
+	background-color: #e1bee7; /* Light purple highlight */
+	color: #9c27b0; /* Purple text */
+}
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.nav-item.active {
+	background-color: #9c27b0;
+	color: white;
+}
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ddd;
-        }
+.nav-item.active:hover {
+	color: white;
+}
 
-        /* Upload Section Styles */
-        .upload-section {
-            background-color: white;
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
+/* Main Content Styles */
+.main-content {
+	flex: 1;
+	padding: 30px;
+	display: flex;
+	gap: 30px;
+}
 
-        .upload-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+.content-left {
+	flex: 1;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+.content-right {
+	width: 300px;
+}
 
-        input[type="text"], 
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            margin-top: 8px;
-        }
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
 
-        .upload-btn {
-            background-color: #7c3aed;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.user-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
 
-        /* File Upload Box Styles */
-        .file-upload-box {
-            background-color: white;
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            height: fit-content;
-        }
+.user-avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #ddd;
+}
 
-        .upload-area {
-            border: 2px dashed #ddd;
-            border-radius: 12px;
-            padding: 40px 20px;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+/* Upload Section Styles */
+.upload-section {
+	background-color: white;
+	padding: 24px;
+	border-radius: 12px;
+	margin-bottom: 30px;
+}
 
-        .upload-area:hover {
-            border-color: #7c3aed;
-            background-color: #f9f7ff;
-        }
+.upload-title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+}
 
-        .upload-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: #7c3aed;
-        }
+.form-group {
+	margin-bottom: 20px;
+}
 
-        .browse-btn {
-            background-color: #7c3aed;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+input[type="text"], textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	margin-top: 8px;
+}
 
-        /* Channel Content Styles */
-        .channel-content {
-            background-color: white;
-            padding: 24px;
-            border-radius: 12px;
-        }
+.upload-btn {
+	background-color: #7c3aed;
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
 
-        .content-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+/* File Upload Box Styles */
+.file-upload-box {
+	background-color: white;
+	padding: 24px;
+	border-radius: 12px;
+	text-align: center;
+	height: fit-content;
+}
 
-        .content-table th {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            color: #666;
-        }
+.upload-area {
+	border: 2px dashed #ddd;
+	border-radius: 12px;
+	padding: 40px 20px;
+	margin: 20px 0;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
 
-        .content-table td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
+.upload-area:hover {
+	border-color: #7c3aed;
+	background-color: #f9f7ff;
+}
 
-        .video-preview {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.upload-icon {
+	font-size: 40px;
+	margin-bottom: 10px;
+	color: #7c3aed;
+}
 
-        .thumbnail {
-            width: 180px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
+.browse-btn {
+	background-color: #7c3aed;
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-top: 10px;
+}
 
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
+/* Channel Content Styles */
+.channel-content {
+	background-color: white;
+	padding: 24px;
+	border-radius: 12px;
+}
 
-        .edit-btn {
-            background-color: #7c3aed;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.content-table {
+	width: 100%;
+	border-collapse: collapse;
+}
 
-        .delete-btn {
-            background-color: #7c3aed;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.content-table th {
+	text-align: left;
+	padding: 12px;
+	border-bottom: 1px solid #eee;
+	color: #666;
+}
 
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 14px;
-        }
+.content-table td {
+	padding: 12px;
+	border-bottom: 1px solid #eee;
+}
 
-        .status-approved {
-            background-color: #e2e8f0;
-        }
+.video-preview {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
 
-        .status-pending {
-            background-color: #e2e8f0;
-        }
+.thumbnail {
+	width: 180px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 6px;
+}
 
-        /* Hide default file input */
-        .file-input {
-            display: none;
-        }
-    </style>
+.action-buttons {
+	display: flex;
+	gap: 10px;
+}
+
+.edit-btn {
+	background-color: #7c3aed;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.delete-btn {
+	background-color: #7c3aed;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.status-badge {
+	padding: 4px 12px;
+	border-radius: 12px;
+	font-size: 14px;
+}
+
+.status-approved {
+	background-color: #e2e8f0;
+}
+
+.status-pending {
+	background-color: #e2e8f0;
+}
+
+/* Hide default file input */
+.file-input {
+	display: none;
+}
+</style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <span>📺 TVPSS</span>
-        </div>
-        <a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
+	<jsp:include page="/WEB-INF/views/sidebar/sidebarTeacher.jsp" />
 
-			<a href="${pageContext.request.contextPath}/crew-resource"
-				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
-				<span>👥 Crew & Resource</span>
-			</a> <a href="${pageContext.request.contextPath}/video-validation"
-				class="nav-item ${currentPage == 'video-validation' ? 'active' : ''}">
-				<span>🎥 Video Validation</span>
-			</a> <a href="${pageContext.request.contextPath}/deals"
-				class="nav-item ${currentPage == 'deals' ? 'active' : ''}"> <span>💼
-					Deals</span>
-			</a> <a href="${pageContext.request.contextPath}/contacts"
-				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
-					Contacts</span>
-			</a> <a href="${pageContext.request.contextPath}/reports"
-				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
-					Reports</span>
-			</a>
-    </div>
+	<div class="main-content">
+		<div class="content-left">
+			<div class="header">
+				<div class="search">
+					<input type="text" placeholder="Search..."
+						style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+				</div>
+				<div class="user-info">
+					<span>Admin</span>
+					<div class="user-avatar"></div>
+				</div>
+			</div>
 
-    <div class="main-content">
-        <div class="content-left">
-            <div class="header">
-                <div class="search">
-                    <input type="text" placeholder="Search..." style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-                </div>
-                <div class="user-info">
-                    <span>Admin</span>
-                    <div class="user-avatar"></div>
-                </div>
-            </div>
+			<div class="upload-section">
+				<div class="upload-title">
+					<h2>📤 Upload Video</h2>
+				</div>
+				<div class="form-group">
+					<label>Title (required)</label> <input type="text">
+				</div>
+				<div class="form-group">
+					<label>Description (required)</label>
+					<textarea rows="4"></textarea>
+				</div>
+				<button class="upload-btn">Upload</button>
+			</div>
 
-            <div class="upload-section">
-                <div class="upload-title">
-                    <h2>📤 Upload Video</h2>
-                </div>
-                <div class="form-group">
-                    <label>Title (required)</label>
-                    <input type="text">
-                </div>
-                <div class="form-group">
-                    <label>Description (required)</label>
-                    <textarea rows="4"></textarea>
-                </div>
-                <button class="upload-btn">Upload</button>
-            </div>
+			<div class="channel-content">
+				<h2 style="margin-bottom: 20px;">Channel Content</h2>
+				<table class="content-table">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Video</th>
+							<th>Title</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>
+								<div class="video-preview">
+									<img src="/api/placeholder/180/100" alt="Video thumbnail"
+										class="thumbnail"> <span>54:48</span>
+								</div>
+							</td>
+							<td>Build it in Figma: Create a design system — Components</td>
+							<td><span class="status-badge status-approved">Approved</span></td>
+							<td>
+								<div class="action-buttons">
+									<button class="edit-btn">Edit Title and Description</button>
+									<button class="delete-btn">Delete</button>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>
+								<div class="video-preview">
+									<img src="/api/placeholder/180/100" alt="Video thumbnail"
+										class="thumbnail"> <span>54:48</span>
+								</div>
+							</td>
+							<td>Build it in Figma: Create a design system — Foundations</td>
+							<td><span class="status-badge status-pending">Pending</span></td>
+							<td>
+								<div class="action-buttons">
+									<button class="edit-btn">Edit Title and Description</button>
+									<button class="delete-btn">Delete</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-            <div class="channel-content">
-                <h2 style="margin-bottom: 20px;">Channel Content</h2>
-                <table class="content-table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Video</th>
-                            <th>Title</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <div class="video-preview">
-                                    <img src="/api/placeholder/180/100" alt="Video thumbnail" class="thumbnail">
-                                    <span>54:48</span>
-                                </div>
-                            </td>
-                            <td>Build it in Figma: Create a design system — Components</td>
-                            <td><span class="status-badge status-approved">Approved</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="edit-btn">Edit Title and Description</button>
-                                    <button class="delete-btn">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="video-preview">
-                                    <img src="/api/placeholder/180/100" alt="Video thumbnail" class="thumbnail">
-                                    <span>54:48</span>
-                                </div>
-                            </td>
-                            <td>Build it in Figma: Create a design system — Foundations</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="edit-btn">Edit Title and Description</button>
-                                    <button class="delete-btn">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+		<div class="content-right">
+			<div class="file-upload-box">
+				<h3>Upload Video File</h3>
+				<div class="upload-area"
+					onclick="document.getElementById('fileInput').click()">
+					<div class="upload-icon">📁</div>
+					<p>Drag & drop video file here</p>
+					<p style="color: #666; font-size: 14px; margin-top: 10px;">or</p>
+					<button class="browse-btn">Browse Files</button>
+				</div>
+				<input type="file" id="fileInput" class="file-input"
+					accept="video/*">
+				<p style="color: #666; font-size: 14px; margin-top: 10px;">
+					Supported formats: MP4, MOV, AVI<br> Maximum file size: 2GB
+				</p>
+			</div>
+		</div>
+	</div>
 
-        <div class="content-right">
-            <div class="file-upload-box">
-                <h3>Upload Video File</h3>
-                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                    <div class="upload-icon">📁</div>
-                    <p>Drag & drop video file here</p>
-                    <p style="color: #666; font-size: 14px; margin-top: 10px;">or</p>
-                    <button class="browse-btn">Browse Files</button>
-                </div>
-                <input type="file" id="fileInput" class="file-input" accept="video/*">
-                <p style="color: #666; font-size: 14px; margin-top: 10px;">
-                    Supported formats: MP4, MOV, AVI<br>
-                    Maximum file size: 2GB
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <script>
+	<script>
         // Add drag and drop functionality
         const uploadArea = document.querySelector('.upload-area');
         

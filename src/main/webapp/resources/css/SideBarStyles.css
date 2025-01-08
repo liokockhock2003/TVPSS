@@ -1,0 +1,35 @@
+/* Sidebar styles */
+		.sidebar {
+			width: 300px; /* Increased width */
+			background-color: white;
+			padding: 20px;
+			box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+		}
+		
+		.nav-item {
+			padding: 15px 16px;
+			margin: 4px 0;
+			border-radius: 8px;
+			color: #666;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			transition: all 0.3s ease;
+			font-size: 22px;
+			text-decoration: none; /* Added for links */
+		}
+		
+		.nav-item:hover {
+			padding: 10px;
+			background-color: #e1bee7; /* Light purple highlight */
+			color: #9c27b0; /* Purple text */
+		}
+		
+		.nav-item.active {
+			background-color: #9c27b0;
+			color: white;
+		}
+		
+		.nav-item.active:hover {
+			color: white;
+		}

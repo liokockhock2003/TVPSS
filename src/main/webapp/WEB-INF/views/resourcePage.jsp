@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS - Crew & Resource Management</title>
+<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -35,42 +36,6 @@ body {
 
 .logo:hover {
 	color: #9c27b0; /* Optional hover effect for logo */
-}
-
-/* Sidebar styles */
-.sidebar {
-	width: 300px; /* Increased width */
-	background-color: white;
-	padding: 20px;
-	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.nav-item {
-	padding: 15px 16px;
-	margin: 4px 0;
-	border-radius: 8px;
-	color: #666;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	transition: all 0.3s ease;
-	font-size: 22px;
-	text-decoration: none; /* Added for links */
-}
-
-.nav-item:hover {
-	padding: 10px;
-	background-color: #e1bee7; /* Light purple highlight */
-	color: #9c27b0; /* Purple text */
-}
-
-.nav-item.active {
-	background-color: #e1bee7; /* Light purple highlight */
-	color: #9c27b0; /* Purple text */
-}
-
-.nav-item.active:hover {
-	color: white;
 }
 
 /* Main content styles */
@@ -249,26 +214,7 @@ body {
 <body>
 	<div class="main-container">
 		<!-- Sidebar -->
-		<div class="sidebar">
-			<a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
-
-			<a href="${pageContext.request.contextPath}/crew-resource"
-				class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
-				<span>👥 Crew & Resource</span>
-			</a> <a href="${pageContext.request.contextPath}/video-validation"
-				class="nav-item ${currentPage == 'video-validation' ? 'active' : ''}">
-				<span>🎥 Video Validation</span>
-			</a> <a href="${pageContext.request.contextPath}/deals"
-				class="nav-item ${currentPage == 'deals' ? 'active' : ''}"> <span>💼
-					Deals</span>
-			</a> <a href="${pageContext.request.contextPath}/contacts"
-				class="nav-item ${currentPage == 'contacts' ? 'active' : ''}"> <span>📞
-					Contacts</span>
-			</a> <a href="${pageContext.request.contextPath}/reports"
-				class="nav-item ${currentPage == 'reports' ? 'active' : ''}"> <span>📊
-					Reports</span>
-			</a>
-		</div>
+		<jsp:include page="/WEB-INF/views/sidebar/sidebarAdmin.jsp" />
 
 
 		<!-- Main Content -->
