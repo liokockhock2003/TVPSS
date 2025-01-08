@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Forum - TVPSS</title>
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -166,31 +171,16 @@ body {
 </style>
 </head>
 <body>
-	<!-- Sidebar -->
-	<div class="sidebar">
-		<a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
-
-		<a href="${pageContext.request.contextPath}/crew-resource"
-			class="nav-item ${currentPage == 'crew-resource' ? 'active' : ''}">
-			<span>👥 Crew & Resource</span>
-		</a>
-		<a href="${pageContext.request.contextPath}/video-validation"
-			class="nav-item ${currentPage == 'video-validation' ? 'active' : ''}">
-			<span>🎥 Video Validation</span>
-		</a>
-		<a href="${pageContext.request.contextPath}/deals"
-			class="nav-item ${currentPage == 'deals' ? 'active' : ''}">
-			<span>💼 Deals</span>
-		</a>
-		<a href="${pageContext.request.contextPath}/contacts"
-			class="nav-item ${currentPage == 'contacts' ? 'active' : ''}">
-			<span>📞 Contacts</span>
-		</a>
-		<a href="${pageContext.request.contextPath}/reports"
-			class="nav-item ${currentPage == 'reports' ? 'active' : ''}">
-			<span>📊 Reports</span>
-		</a>
-	</div>
+	<sec:authorize access="isAuthenticated()">
+		<c:choose>
+			<c:when test="${role == 'TEACHER'}">
+				<jsp:include page="/WEB-INF/views/sidebar/sidebarTeacher.jsp" />
+			</c:when>
+			<c:when test="${role == 'STUDENT'}">
+				<jsp:include page="/WEB-INF/views/sidebar/sidebarStudent.jsp" />
+			</c:when>
+		</c:choose>
+	</sec:authorize>
 
 	<!-- Main Content -->
 	<div class="content">
@@ -207,20 +197,24 @@ body {
 		<h4 class="mb-4">Forum</h4>
 		<div class="form-container">
 			<form action="submitPost.jsp" method="post">
-				<input type="text" name="title" placeholder="Title (required)" required>
-				<textarea name="description" placeholder="Description (required)" rows="4" required></textarea>
+				<input type="text" name="title" placeholder="Title (required)"
+					required>
+				<textarea name="description" placeholder="Description (required)"
+					rows="4" required></textarea>
 				<button type="submit">Upload</button>
 			</form>
 		</div>
 		<div class="forum-posts">
 			<div class="forum-post">
 				<h3>How to become a good reporter?</h3>
-				<p>Hello, does anyone can give some tips on how to become a good reporter?</p>
+				<p>Hello, does anyone can give some tips on how to become a good
+					reporter?</p>
 				<div class="reply">Reply</div>
 			</div>
 			<div class="forum-post">
 				<h3>Pertandingan Video Pendek 2020</h3>
-				<p>Saya mengalami isu untuk upload video semasa pertandingan, pihak berkuasa sila ambil tindakan!!!</p>
+				<p>Saya mengalami isu untuk upload video semasa pertandingan,
+					pihak berkuasa sila ambil tindakan!!!</p>
 				<div class="reply">Reply</div>
 			</div>
 			<div class="forum-post">

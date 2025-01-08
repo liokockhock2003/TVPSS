@@ -1,18 +1,16 @@
 package com.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.service.UserDao;
 import com.entity.Users;
+import com.service.UserDao;
 
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,21 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(username -> {
-            Users user = userDao.findByUsername(username);
-            if (user != null) {
-                System.out.println(user.getUsername());
-                return org.springframework.security.core.userdetails.User
-                    .withUsername(username)
-                    .password(user.getPassword())
-                    .roles(user.getRole())
-                    .build();
-            } else {
-                System.out.println(user != null);
-            }
-            throw new UsernameNotFoundException("User not found");
-        }).passwordEncoder(passwordEncoder());
+			Users user = userDao.findByUsername(username);
+			if (user != null) {
+				System.out.println(user.getUsername());
+				return org.springframework.security.core.userdetails.User.withUsername(username)
+						.password(user.getPassword()).roles(user.getRole()).build();
+			} else {
+				System.out.println(user != null);
+			}
+			throw new UsernameNotFoundException("User not found");
+		}).passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -49,10 +44,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/video-library-student").hasRole("STUDENT")
                 .antMatchers("/validate-video").hasRole("ADMIN")
                 .antMatchers("/video-upload").hasRole("TEACHER")
+                .antMatchers("/resources/**", "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .defaultSuccessUrl("/dashboard")
+	            .successHandler((request, response, authentication) -> {
+	                String role = authentication.getAuthorities().stream()
+	                    .map(GrantedAuthority::getAuthority)
+	                    .map(auth -> auth.replace("ROLE_", ""))  // Remove ROLE_ prefix if present
+	                    .findFirst()
+	                    .orElse("");
+	                request.getSession().setAttribute("role", role);
+	                response.sendRedirect("/home");
+	            })
                 .permitAll()
                 .and()
             .logout()
@@ -60,4 +64,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .csrf();
     }
-}// end class
+}
+// end class
