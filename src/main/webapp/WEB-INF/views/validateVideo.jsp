@@ -229,6 +229,7 @@ button:disabled {
 
 			<!-- Video Validation Table -->
 			<section class="video-validation">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrf-token" />
 				<h2>Video Validation</h2>
 				<table>
 					<tr>
@@ -237,43 +238,11 @@ button:disabled {
 						<th>Details</th>
 						<th>Action</th>
 					</tr>
-					<tr>
-						<td>1.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td><span>Build it in Figma: Create a design system —
-								Components</span><br>SK Taman Bukit Dahlia</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve">Approve</button>
-							<button class="btn btn-reject">Reject</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td>Build it in Figma: Create a design system — Foundations<br>SK
-							Taman Bukit Dahlia
-						</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve">Approve</button>
-							<button class="btn btn-reject">Reject</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td>Amelie Piano Soundtrack<br>SMJK Jit Sa
-						</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve">Approve</button>
-							<button class="btn btn-reject">Reject</button>
-						</td>
-					</tr>
 				</table>
 			</section>
 		</div>
 	</div>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/pendingVideos.js"></script>
 </body>
 </html>

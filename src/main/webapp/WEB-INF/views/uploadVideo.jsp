@@ -6,7 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TVPSS - Video Management</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <style>
 * {
 	margin: 0;
@@ -21,7 +25,6 @@ body {
 	min-height: 100vh;
 	background-color: #f5f5f5;
 }
-
 
 /* Logo styles */
 .logo {
@@ -280,19 +283,42 @@ input[type="text"], textarea {
 				</div>
 			</div>
 
-			<div class="upload-section">
-				<div class="upload-title">
-					<h2>📤 Upload Video</h2>
+			<form method="post"
+				action="${pageContext.request.contextPath}/videos/upload"
+				enctype="multipart/form-data">
+				<div class="upload-section">
+					<div class="upload-title">
+						<h2>📤 Upload Video</h2>
+					</div>
+					<div class="form-group">
+						<label>Title (required)</label> <input type="text" name="title"
+							required>
+					</div>
+					<div class="form-group">
+						<label>Description (required)</label>
+						<textarea rows="4" name="description"></textarea>
+					</div>
+
+					<div class="content-right">
+						<div class="file-upload-box">
+							<h3>Upload Video File</h3>
+							<div class="upload-area"
+								onclick="document.getElementById('fileInput').click()">
+								<div class="upload-icon">📁</div>
+								<p>Drag & drop video file here</p>
+								<p style="color: #666; font-size: 14px; margin-top: 10px;">or</p>
+								<button class="browse-btn">Browse Files</button>
+							</div>
+							<input type="file" name="file" id="fileInput" class="file-input"
+								accept="video/*">
+							<p style="color: #666; font-size: 14px; margin-top: 10px;">
+								Supported formats: MP4, MOV, AVI<br> Maximum file size: 2GB
+							</p>
+						</div>
+					</div>
+					<button type="submit" class="upload-btn">Upload</button>
 				</div>
-				<div class="form-group">
-					<label>Title (required)</label> <input type="text">
-				</div>
-				<div class="form-group">
-					<label>Description (required)</label>
-					<textarea rows="4"></textarea>
-				</div>
-				<button class="upload-btn">Upload</button>
-			</div>
+			</form>
 
 			<div class="channel-content">
 				<h2 style="margin-bottom: 20px;">Channel Content</h2>
@@ -306,63 +332,14 @@ input[type="text"], textarea {
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>
-								<div class="video-preview">
-									<img src="/api/placeholder/180/100" alt="Video thumbnail"
-										class="thumbnail"> <span>54:48</span>
-								</div>
-							</td>
-							<td>Build it in Figma: Create a design system — Components</td>
-							<td><span class="status-badge status-approved">Approved</span></td>
-							<td>
-								<div class="action-buttons">
-									<button class="edit-btn">Edit Title and Description</button>
-									<button class="delete-btn">Delete</button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>
-								<div class="video-preview">
-									<img src="/api/placeholder/180/100" alt="Video thumbnail"
-										class="thumbnail"> <span>54:48</span>
-								</div>
-							</td>
-							<td>Build it in Figma: Create a design system — Foundations</td>
-							<td><span class="status-badge status-pending">Pending</span></td>
-							<td>
-								<div class="action-buttons">
-									<button class="edit-btn">Edit Title and Description</button>
-									<button class="delete-btn">Delete</button>
-								</div>
-							</td>
-						</tr>
+					<tbody id="video-list">
+						<!-- Dynamic rows will be added here -->
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-		<div class="content-right">
-			<div class="file-upload-box">
-				<h3>Upload Video File</h3>
-				<div class="upload-area"
-					onclick="document.getElementById('fileInput').click()">
-					<div class="upload-icon">📁</div>
-					<p>Drag & drop video file here</p>
-					<p style="color: #666; font-size: 14px; margin-top: 10px;">or</p>
-					<button class="browse-btn">Browse Files</button>
-				</div>
-				<input type="file" id="fileInput" class="file-input"
-					accept="video/*">
-				<p style="color: #666; font-size: 14px; margin-top: 10px;">
-					Supported formats: MP4, MOV, AVI<br> Maximum file size: 2GB
-				</p>
-			</div>
-		</div>
+
 	</div>
 
 	<script>
@@ -409,5 +386,8 @@ input[type="text"], textarea {
             console.log(files);
         }
     </script>
+    
+    <script src="${pageContext.request.contextPath}/resources/js/videos.js"></script>
+    
 </body>
 </html>
