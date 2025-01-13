@@ -55,14 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                    .findFirst()
 	                    .orElse("");
 	                request.getSession().setAttribute("role", role);
-	                response.sendRedirect("/home");
+	                response.sendRedirect("/TVPSS-1/home");
 	            })
                 .permitAll()
                 .and()
             .logout()
                 .permitAll()
                 .and()
-            .csrf();
+            .csrf().disable();
     }
 }
 // end class
