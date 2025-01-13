@@ -271,8 +271,13 @@ body {
 		</div>
 
 		<div class="video-container">
-			<img src="/api/placeholder/1280/720" alt="Video thumbnail"
-				style="width: 100%; height: 100%; object-fit: cover;">
+			<video controls>
+				<source src="../${video.filePath}" type="video/mp4">
+				<source src="../${video.filePath}" type="video/webm">
+				<source src="../${video.filePath}" type="video/ogg">
+				<source src="../${video.filePath}" type="video/mov">
+				<p>Your browser does not support the video tag.</p>
+			</video>
 			<div class="video-controls">
 				<button class="control-btn">▶️</button>
 				<button class="control-btn">⏭️</button>

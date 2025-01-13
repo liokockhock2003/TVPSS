@@ -12,7 +12,15 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	<context:component-scan base-package="com.controller"></context:component-scan>
+	<context:component-scan base-package="com.controller, com.config, com.entity, com.service"></context:component-scan>
+	
+	  <!-- Enable mvc annotations -->
+    <mvc:annotation-driven />
+
+    <!-- Resource mapping for static files -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/js/**" location="/resources/js/" />
+    <mvc:resources mapping="/css/**" location="/resources/css/" />
 	
 	<bean id="viewResolver" class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

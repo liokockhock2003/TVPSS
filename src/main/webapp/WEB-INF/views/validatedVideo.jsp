@@ -232,49 +232,24 @@ button:disabled {
 
 			<!-- Video Validation Table -->
 			<section class="validated-video">
-				<h2>Validated Video</h2>
-				<table>
-					<tr>
-						<th>No</th>
-						<th>Video</th>
-						<th>Details</th>
-						<th>Action</th>
-					</tr>
-					<tr>
-						<td>1.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td><span>Build it in Figma: Create a design system —
-								Components</span><br>SK Taman Bukit Dahlia</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve" disabled>Approved</button>
-							<button class="btn btn-approve">Delete</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td><span>Build it in Figma: Create a design system —
-								Foundations</span><br>SK Taman Bukit Dahlia</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve" disabled>Approved</button>
-							<button class="btn btn-approve">Delete</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3.</td>
-						<td><img src="https://via.placeholder.com/200x120"
-							class="video-thumbnail" alt="Video"></td>
-						<td><span>Amelie Piano Soundtrack</span><br>SMJK Jit Sa</td>
-						<td class="action-buttons">
-							<button class="btn btn-approve" disabled>Approved</button>
-							<button class="btn btn-approve">Delete</button>
-						</td>
-					</tr>
+				<h2>Validated Videos</h2>
+				<table id="validated-videos">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Video</th>
+							<th>Details</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Video rows will be populated dynamically by JavaScript -->
+					</tbody>
 				</table>
 			</section>
 		</div>
 	</div>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/validatedVideo.js"></script>
 </body>
 </html>
