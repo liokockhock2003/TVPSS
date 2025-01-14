@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.Users;
+
 import com.entity.Video;
 import com.service.UserDao;
 import com.service.VideoDao;
@@ -19,6 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,17 +162,30 @@ public class VideoController {
         for (Users user : users) {
             userIdToUsernameMap.put(user.getId(), user.getUsername());
         }
+        
+        
 
         // Create the video list with additional user information
         List<Map<String, String>> videoList = new ArrayList<>();
         for (Video video : videos) {
             String username = userIdToUsernameMap.getOrDefault(video.getUserId(), "Unknown User");
+            String uploadDuration;
+            long daysBetween = ChronoUnit.DAYS.between(video.getUploadDate(), LocalDateTime.now());
+            if (daysBetween == 0) {
+                uploadDuration = "Today";
+            } else if (daysBetween == 1) {
+                uploadDuration = "1 day ago";
+            } else {
+                uploadDuration = daysBetween + " days ago";
+            }
             videoList.add(Map.of(
                 "thumbnail", video.getThumbnailPath() != null ? video.getThumbnailPath() : "",
                 "duration", video.getDuration() != null ? video.getDuration() : "00:00",
                 "title", video.getTitle(),
                 "username", username,
-                "id", String.valueOf(video.getId())
+                "id", String.valueOf(video.getId()),
+                "views", String.valueOf(video.getViews()),
+                "uploadDuration", uploadDuration
             ));
         }
 
@@ -177,16 +195,22 @@ public class VideoController {
 	@RequestMapping("/viewVideo")
 	public String viewVideo(@RequestParam("id") int videoId, Model model) {
 	    // Fetch video by ID using the video service
+		videoService.incrementViews(videoId);
 	    Video video = videoService.getVideoById(videoId);
+	    Integer userId = (Integer) session.getAttribute("userId");
+	    Users user = userService.findById(userId);
+	    
+	    // Format the upload date
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+	    String formattedDate = video.getUploadDate().format(formatter);
 
-	    // Check if the video is found
-	    if (video == null) {
-	        // Handle the case where the video is not found (e.g., return an error page or redirect)
-	        return "errorPage"; // Or you can handle the error differently
-	    }
+	    // Add the formatted date to the model
+	    model.addAttribute("formattedDate", formattedDate);
+	    
 
 	    // Add the video object to the model to pass it to the view
 	    model.addAttribute("video", video);
+	    model.addAttribute("user", user);
 
 	    // Return the view name (viewVideo.jsp)
 	    return "viewVideo";

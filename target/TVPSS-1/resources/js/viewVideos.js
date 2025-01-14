@@ -55,9 +55,8 @@ function loadVideos() {
                 videoMetaDiv.appendChild(usernameSpan);
 
                 const videoStatsDiv = document.createElement('div');
-	
                 videoStatsDiv.classList.add('video-stats');
-                videoStatsDiv.textContent = `${video.views} views   •   ${video.uploadDuration}`; // Adjust this if you have view counts and upload dates
+                videoStatsDiv.innerText = 'N/A views • N/A ago'; // Adjust this if you have view counts and upload dates
 
                 videoInfoDiv.appendChild(videoTitle);
                 videoInfoDiv.appendChild(videoMetaDiv);

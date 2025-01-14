@@ -65,14 +65,27 @@ public class VideoDao {
 		String hql = "SELECT v FROM Video v WHERE v.status <> :pendingStatus";
 		return entityManager.createQuery(hql, Video.class).setParameter("pendingStatus", "Pending").getResultList();
 	}
-	
+
 	public List<Video> getApprovedVideos() {
-	    String hql = "SELECT v FROM Video v WHERE v.status = :approvedStatus";
-	    return entityManager.createQuery(hql, Video.class)
-	            .setParameter("approvedStatus", "Approved")
-	            .getResultList();
+		String hql = "SELECT v FROM Video v WHERE v.status = :approvedStatus";
+		return entityManager.createQuery(hql, Video.class).setParameter("approvedStatus", "Approved").getResultList();
 	}
 
+	// Function to increment views count for a video
+	public void incrementViews(int videoId) {
+		String hql = "UPDATE Video v SET v.views = v.views + 1 WHERE v.id = :videoId";
+		entityManager.createQuery(hql).setParameter("videoId", videoId).executeUpdate();
+	}
+	
+	public void incrementLikes(int videoId) {
+		String hql = "UPDATE Video v SET v.likes = v.likes + 1 WHERE v.id = :videoId";
+		entityManager.createQuery(hql).setParameter("videoId", videoId).executeUpdate();
+	}
+	
+	public void incrementComments(int videoId) {
+		String hql = "UPDATE Video v SET v.comments = v.comments + 1 WHERE v.id = :videoId";
+		entityManager.createQuery(hql).setParameter("videoId", videoId).executeUpdate();
+	}
 
 	// Delete a video
 	public void deleteVideo(int id) {

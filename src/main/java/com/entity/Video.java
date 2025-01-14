@@ -35,6 +35,15 @@ public class Video {
     
     @Column(name = "duration", nullable = false)
     private String duration;
+    
+    @Column(name = "views", nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int views;
+
+    @Column(name = "likes", nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int likes;
+
+    @Column(name = "comments", nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int comments;
 
     // Getters and Setters
     public int getId() {
@@ -98,5 +107,29 @@ public class Video {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+   
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
     }
 }
