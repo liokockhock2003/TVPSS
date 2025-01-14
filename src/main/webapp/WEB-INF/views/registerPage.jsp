@@ -154,7 +154,7 @@ body {
 			<div class="mb-3" id="yearField" style="display: none;">
 				<label for="year" class="form-label">Year</label> <select
 					class="form-select" id="year" name="year">
-					<option value="">Select year</option>
+					<option value="0">Select year</option>
 					<option value="1">Year 1</option>
 					<option value="2">Year 2</option>
 					<option value="3">Year 3</option>

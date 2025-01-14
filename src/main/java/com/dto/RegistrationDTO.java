@@ -10,7 +10,7 @@ public class RegistrationDTO {
 	private int age;
 	private int year;
 	private int schoolId;
-
+	
 	// Getters and setters
 	public String getUsername() {
 		return username;
