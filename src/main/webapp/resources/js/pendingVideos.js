@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Function to handle approve/reject actions
 	const handleStatusUpdate = async (videoId, status) => {
 		try {
-			// Get CSRF token from the meta tag
 			// Get CSRF token from hidden input field
 			const csrfToken = document.getElementById("csrf-token").value;
 			const response = await fetch(`videos/${videoId}/status?status=${status}`, {
