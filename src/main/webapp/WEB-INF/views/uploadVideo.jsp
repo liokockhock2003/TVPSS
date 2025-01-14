@@ -314,11 +314,14 @@ input[type="text"], textarea {
 							</p>
 						</div>
 					</div>
+					<input type="hidden" id="csrf-token" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
 					<button type="submit" class="upload-btn">Upload</button>
 				</div>
 			</form>
 
-			<input type="hidden" id="csrf-token" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			<input type="hidden" id="csrf-token" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 			<div class="channel-content">
 				<h2 style="margin-bottom: 20px;">Channel Content</h2>
 				<table class="content-table">
@@ -385,8 +388,8 @@ input[type="text"], textarea {
             console.log(files);
         }
     </script>
-    
-    <script src="${pageContext.request.contextPath}/resources/js/videos.js"></script>
-    
+
+	<script src="${pageContext.request.contextPath}/resources/js/videos.js"></script>
+
 </body>
 </html>

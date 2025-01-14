@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.entity.Student;
 import com.entity.Users;
 import java.util.List;
 
@@ -59,5 +61,31 @@ public class UserDao {
         if (user != null) {
             currentSession.delete(user);
         }
+    }
+    
+    @Transactional
+    public boolean existsByUsername(String username) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Long count = currentSession.createQuery(
+            "select count(*) from Users where username = :username", Long.class)
+            .setParameter("username", username)
+            .uniqueResult();
+        return count > 0;
+    }
+    
+    @Transactional
+    public boolean existsByEmail(String email) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Long count = currentSession.createQuery(
+            "select count(*) from Users where email = :email", Long.class)
+            .setParameter("email", email)
+            .uniqueResult();
+        return count > 0;
+    }
+    
+    @Transactional
+    public void saveStudent(Student student) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(student);
     }
 }

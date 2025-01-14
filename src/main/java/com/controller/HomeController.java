@@ -53,20 +53,6 @@ public class HomeController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/crew-resource")
-	public ModelAndView crewResource() {
-		ModelAndView modelAndView = new ModelAndView("crewResourcePage");
-		modelAndView.addObject("currentPage", "crewResourcePage");
-		return modelAndView;
-	}
-
-	@RequestMapping("manage-school")
-	public ModelAndView manageSchool() {
-		ModelAndView modelAndView = new ModelAndView("manageSchoolPage");
-		modelAndView.addObject("currentPage", "crewResourcePage");
-		return modelAndView;
-	}
-
 	@RequestMapping("/validate-video")
 	public ModelAndView validateVideo() {
 		ModelAndView modelAndView = new ModelAndView("validateVideo");
@@ -78,13 +64,6 @@ public class HomeController {
 	public ModelAndView validatedVideo() {
 		ModelAndView modelAndView = new ModelAndView("validatedVideo");
 		modelAndView.addObject("currentPage", "validateVideo");
-		return modelAndView;
-	}
-
-	@RequestMapping("/resource-page")
-	public ModelAndView resourcePage() {
-		ModelAndView modelAndView = new ModelAndView("resourcePage");
-		modelAndView.addObject("currentPage", "crewResourcePage");
 		return modelAndView;
 	}
 

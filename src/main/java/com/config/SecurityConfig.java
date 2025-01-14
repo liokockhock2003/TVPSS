@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/school-profile").hasRole("ADMIN")
                         .antMatchers("/school-review").hasRole("ADMIN")
                         .antMatchers("/resources/**", "/css/**", "/js/**").permitAll()
+                        .antMatchers("/register").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .successHandler((request, response, authentication) -> {
@@ -72,6 +73,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     .findFirst()
                                     .orElse("");
                             request.getSession().setAttribute("role", role); 
+                            
+                         // Redirect users based on their roles
+                            switch (role) {
+                                case "STUDENT":
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/student-library-student");
+                                    break;
+                                case "TEACHER":
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/dashboard");
+                                    break;
+                                case "ADMIN":
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/validate-video");
+                                    break;
+                                default:
+                                    response.sendRedirect("/"); // Redirect to a default page if no role is matched
+                                    break;
+                            }
                             
                          // Retrieve the user ID and store it in the session
                             Object principal = authentication.getPrincipal();
@@ -83,11 +100,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 }
                             }
                         })
+                        
+                        .loginPage("/login")
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .permitAll())
-                .csrf(csrf -> csrf
-                        .ignoringAntMatchers("/videos/upload"));
+                .csrf().disable();
     }
 }
 // end class

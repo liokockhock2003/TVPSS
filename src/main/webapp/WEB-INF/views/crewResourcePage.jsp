@@ -139,6 +139,7 @@ body {
 							<tr>
 								<td>${status.count}</td>
 								<td>${school.name}</td>
+								<!-- Delete below if error -->
 								<td>${school.totalCrew}</td>
 								<td>${school.totalResources}</td>
 								<td>${school.availableResources}</td>
