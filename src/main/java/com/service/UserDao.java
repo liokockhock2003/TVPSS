@@ -24,6 +24,15 @@ public class UserDao {
                 .setParameter("username", username)
                 .uniqueResult();
     }
+    
+    @Transactional
+    public Users findById(int id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.createQuery("from Users where id = :id", Users.class)
+                .setParameter("id", id)
+                .uniqueResult();
+    }
+
 
     @Transactional
     public void save(Users user) {
