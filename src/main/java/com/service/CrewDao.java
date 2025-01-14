@@ -38,10 +38,18 @@ public class CrewDao {
     }
     
     @Transactional
-    public void deleteStudent(int id) {
+    public void deleteCrew(int id) {
         Crew crew = getCrew(id);
         if (crew != null) {
             getCurrentSession().delete(crew);
         }
+    }
+    
+    @Transactional
+    public int getTotalCrewCountBySchoolId(int schoolId) {
+        return ((Number) getCurrentSession()
+            .createQuery("SELECT COUNT(c) FROM Crew c WHERE c.school.id = :schoolId")
+            .setParameter("schoolId", schoolId)
+            .uniqueResult()).intValue();
     }
 }
