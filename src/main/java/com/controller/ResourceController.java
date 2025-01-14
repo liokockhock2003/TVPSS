@@ -31,7 +31,7 @@ public class ResourceController {
 	public ModelAndView manageSchool() {
 		ModelAndView modelAndView = new ModelAndView("manageSchoolPage");
 		modelAndView.addObject("currentPage", "crewResourcePage");
-		modelAndView.addObject("students", crewDao.getAllStudents());
+		modelAndView.addObject("students", crewDao.getAllCrews());
 		return modelAndView;
 	}
 	

@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/school-profile").hasRole("ADMIN")
                         .antMatchers("/school-review").hasRole("ADMIN")
                         .antMatchers("/resources/**", "/css/**", "/js/**").permitAll()
+                        .antMatchers("/register").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .successHandler((request, response, authentication) -> {
@@ -83,11 +84,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 }
                             }
                         })
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .permitAll())
-                .csrf(csrf -> csrf
-                        .ignoringAntMatchers("/videos/upload"));
+                .csrf().disable();
     }
 }
 // end class

@@ -26,19 +26,18 @@ public class SchoolDao {
     }
     
     @Transactional
-    public School getSchool(int id) {
+    public School getSchoolById(int id) {
         return getCurrentSession().get(School.class, id);
     }
     
     @Transactional
-    @SuppressWarnings("unchecked")
     public List<School> getAllSchools() {
-        return getCurrentSession().createQuery("from School").list();
+        return getCurrentSession().createQuery("from School order by name", School.class).getResultList();
     }
     
     @Transactional
     public void deleteSchool(int id) {
-        School school = getSchool(id);
+        School school = getSchoolById(id);
         if (school != null) {
             getCurrentSession().delete(school);
         }
