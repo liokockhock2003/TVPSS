@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS - Crew & Resource Management</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -97,8 +99,6 @@ body {
 .table td {
 	vertical-align: middle;
 }
-
-
 </style>
 </head>
 <body>
@@ -144,32 +144,12 @@ body {
 								<td>${school.totalResources}</td>
 								<td>${school.availableResources}</td>
 								<td>
-									<button class="manage-btn">Manage</button>
+									<form action="${pageContext.request.contextPath}/manage-school/crew-page/${school.schoolId}" method="get">
+										<button type="submit" class="manage-btn">Manage</button>
+									</form>
 								</td>
 							</tr>
 						</c:forEach>
-
-						<!-- Sample data (remove when using real data) -->
-						<tr>
-							<td>1.</td>
-							<td>Sekolah Kebangsaan Taman Bukit Dahlia</td>
-							<td>2</td>
-							<td>5</td>
-							<td>2</td>
-							<td>
-								<button class="manage-btn">Manage</button>
-							</td>
-						</tr>
-						<tr>
-							<td>2.</td>
-							<td>Sekolah Kebangsaan Taman Cendana</td>
-							<td>7</td>
-							<td>6</td>
-							<td>0</td>
-							<td>
-								<button class="manage-btn">Manage</button>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
