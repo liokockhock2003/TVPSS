@@ -106,7 +106,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll())
                 .logout(logout -> logout
                         .permitAll())
-                .csrf().disable();
+                .csrf(csrf -> csrf
+                        .ignoringAntMatchers("/videos/upload"));
     }
 }
 // end class
