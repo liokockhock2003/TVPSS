@@ -20,6 +20,10 @@ public class VideoDao {
 	public void saveVideo(Video video) {
 		entityManager.persist(video);
 	}
+	
+	public Video updateVideo(Video video) {
+        return entityManager.merge(video);
+    }
 
 	// Fetch a video by its ID
 	public Video getVideoById(int id) {

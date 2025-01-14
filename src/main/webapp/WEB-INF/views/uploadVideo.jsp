@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TVPSS - Video Management</title>
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <link
 	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
 	rel="stylesheet">
@@ -320,6 +318,7 @@ input[type="text"], textarea {
 				</div>
 			</form>
 
+			<input type="hidden" id="csrf-token" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 			<div class="channel-content">
 				<h2 style="margin-bottom: 20px;">Channel Content</h2>
 				<table class="content-table">

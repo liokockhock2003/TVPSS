@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -109,6 +110,70 @@ public class VideoController {
 	        return "redirect:/upload-video";
 	    }
 	}
+	
+	@PostMapping("/update/{videoId}")
+	public ResponseEntity<?> updateVideoDetails(
+	        @PathVariable int videoId,
+	        @RequestBody Video updatedVideo) {
+
+	    Video existingVideo = videoService.getVideoById(videoId);
+
+	    if (existingVideo == null) {
+	        return ResponseEntity.status(404).body("Video not found");
+	    }
+
+	    // Update the fields of the existing video
+	    if (updatedVideo.getTitle() != null) {
+	        existingVideo.setTitle(updatedVideo.getTitle());
+	    }
+	    if (updatedVideo.getDescription() != null) {
+	        existingVideo.setDescription(updatedVideo.getDescription());
+	    }
+
+	    // Update the video in the database
+	    Video savedVideo = videoService.updateVideo(existingVideo);
+	    return ResponseEntity.ok(savedVideo);
+	}
+
+
+
+    // Delete video
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteVideo(@PathVariable int id) {
+        try {
+        	Video video = videoService.getVideoById(id);
+            String uploadDir = "C:/";
+            String videoFilePath = uploadDir + video.getFilePath();
+            String thumbnailFilePath = uploadDir + video.getThumbnailPath();
+
+            // Delete video file
+            deleteFile(videoFilePath);
+
+            // Delete thumbnail file
+            deleteFile(thumbnailFilePath);
+            videoService.deleteVideo(id);
+            
+            
+            return ResponseEntity.ok("Video successfully deleted");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                               .body("Error deleting video: " + e.getMessage());
+        }
+    }
+    
+ // Helper function to delete files
+    private void deleteFile(String filePath) {
+        if (filePath != null && !filePath.isEmpty()) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                if (!file.delete()) {
+                    System.err.println("Failed to delete file: " + filePath);
+                }
+            } else {
+                System.err.println("File not found: " + filePath);
+            }
+        }
+    }
 
 
 	@PreAuthorize("hasRole('TEACHER')")
@@ -131,7 +196,9 @@ public class VideoController {
         List<Map<String, String>> videoList = new ArrayList<>();
         for (Video video : videos) {
             videoList.add(Map.of(
+            	"id", String.valueOf(video.getId()),
                 "thumbnail", video.getThumbnailPath(),
+                "description", video.getDescription(),
                 "duration", video.getDuration(),
                 "title", video.getTitle(),
                 "status", video.getStatus()
