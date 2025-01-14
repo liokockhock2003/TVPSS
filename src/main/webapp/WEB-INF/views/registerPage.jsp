@@ -163,6 +163,9 @@ body {
 					<option value="6">Year 6</option>
 				</select>
 			</div>
+			<input
+					type="hidden" id="csrf-token" name="${_csrf.parameterName}"
+					value="${_csrf.token}" /> 
 
 			<button type="submit" class="btn btn-register">Register</button>
 

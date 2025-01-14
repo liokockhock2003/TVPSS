@@ -118,6 +118,9 @@ body {
 				<input type="checkbox" id="remember-me" name="remember-me">
 				<label for="remember-me">Remember me</label>
 			</div>
+			<input
+					type="hidden" id="csrf-token" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
 
 			<button type="submit" class="btn btn-login">Login</button>
 		</form>
