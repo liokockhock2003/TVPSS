@@ -9,6 +9,9 @@ public class Crew {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(nullable = false)
+	private String role;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id", nullable = false)
@@ -52,5 +55,13 @@ public class Crew {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
 	}
 }
