@@ -85,4 +85,12 @@ public class Resource {
 	public void setSchool(School school) {
 		this.school = school;
 	}
+	
+	public Boolean getAvailability() {
+		return availability;
+	}
+	
+	public void setAvailability(Boolean availability) {
+		this.availability = availability;
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.entity.Crew;
 import com.entity.Student;
 
 import java.util.List;
@@ -43,5 +44,16 @@ public class StudentDao {
         if (student != null) {
             getCurrentSession().delete(student);
         }
+    }
+    
+    @Transactional
+    public List<Student> getStudentsBySchoolId(int schoolId) {
+        return getCurrentSession()
+                .createQuery("SELECT s FROM Student s "
+                           + "JOIN FETCH s.user u "
+                           + "JOIN FETCH s.school sch "
+                           + "WHERE s.school.id = :schoolId", Student.class)
+                .setParameter("schoolId", schoolId)
+                .getResultList();
     }
 }
