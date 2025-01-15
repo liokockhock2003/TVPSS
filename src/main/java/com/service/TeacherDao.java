@@ -12,36 +12,46 @@ import java.util.List;
 
 @Service
 public class TeacherDao {
-    
-    @Autowired
-    private SessionFactory sessionFactory;
-    
-    @Transactional
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
-    
-    @Transactional
-    public void saveTeacher(Teacher teacher) {
-        getCurrentSession().saveOrUpdate(teacher);
-    }
-    
-    @Transactional
-    public Teacher getTeacher(int id) {
-        return getCurrentSession().get(Teacher.class, id);
-    }
-    
-    @Transactional
-    @SuppressWarnings("unchecked")
-    public List<Teacher> getAllTeachers() {
-        return getCurrentSession().createQuery("from Teacher").list();
-    }
-    
-    @Transactional
-    public void deleteTeacher(int id) {
-        Teacher teacher = getTeacher(id);
-        if (teacher != null) {
-            getCurrentSession().delete(teacher);
-        }
-    }
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Transactional
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+
+	@Transactional
+	public void saveTeacher(Teacher teacher) {
+		getCurrentSession().saveOrUpdate(teacher);
+	}
+
+	@Transactional
+	public Teacher getTeacher(int id) {
+		return getCurrentSession().get(Teacher.class, id);
+	}
+	
+	@Transactional
+	public Teacher getTeacherByUserId(int userId) {
+	    String hql = "FROM Teacher WHERE user_id = :userId";
+	    return getCurrentSession()
+	            .createQuery(hql, Teacher.class)
+	            .setParameter("userId", userId)
+	            .uniqueResult();
+	}
+
+
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<Teacher> getAllTeachers() {
+		return getCurrentSession().createQuery("from Teacher").list();
+	}
+
+	@Transactional
+	public void deleteTeacher(int id) {
+		Teacher teacher = getTeacher(id);
+		if (teacher != null) {
+			getCurrentSession().delete(teacher);
+		}
+	}
 }
