@@ -3,6 +3,10 @@ package com.controller;
 import com.entity.Users;
 
 import com.entity.Video;
+import com.entity.Teacher;
+import com.service.CommentDao;
+import com.service.LikeDao;
+import com.service.TeacherDao;
 import com.service.UserDao;
 import com.service.VideoDao;
 
@@ -40,7 +44,16 @@ public class VideoController {
 	private VideoDao videoService;
 	
 	@Autowired
+	private LikeDao likeService;
+	
+	@Autowired
+	private CommentDao commentService;
+	
+	@Autowired
 	private UserDao userService;
+	
+	@Autowired
+	private TeacherDao teacherService;
 	
 	@Autowired
     private HttpSession session;
@@ -151,6 +164,8 @@ public class VideoController {
 
             // Delete thumbnail file
             deleteFile(thumbnailFilePath);
+            likeService.deleteLikeByVideoId(id);
+            commentService.deleteCommentByVideoId(id);
             videoService.deleteVideo(id);
             
             
@@ -223,11 +238,12 @@ public class VideoController {
         // Fetch the list of videos for the given user_id
         List<Video> videos = videoService.getApprovedVideos();
         List<Users> users = userService.findAll();
+        List<Teacher> teachers = teacherService.getAllTeachers();
         
         // Create a map of user IDs to usernames for quick lookup
         Map<Integer, String> userIdToUsernameMap = new HashMap<>();
-        for (Users user : users) {
-            userIdToUsernameMap.put(user.getId(), user.getUsername());
+        for (Teacher teacher : teachers) {
+            userIdToUsernameMap.put(teacher.getUser().getId(), teacher.getName());
         }
         
         
@@ -264,8 +280,8 @@ public class VideoController {
 	    // Fetch video by ID using the video service
 		videoService.incrementViews(videoId);
 	    Video video = videoService.getVideoById(videoId);
-	    Integer userId = (Integer) session.getAttribute("userId");
-	    Users user = userService.findById(userId);
+	    Users user = userService.findById(video.getUserId());
+	    Teacher teacher = teacherService.getTeacherByUserId(video.getUserId());
 	    
 	    // Format the upload date
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
@@ -278,6 +294,7 @@ public class VideoController {
 	    // Add the video object to the model to pass it to the view
 	    model.addAttribute("video", video);
 	    model.addAttribute("user", user);
+	    model.addAttribute("teacher", teacher);
 
 	    // Return the view name (viewVideo.jsp)
 	    return "viewVideo";

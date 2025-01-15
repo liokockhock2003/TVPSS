@@ -1,9 +1,12 @@
 package com.controller;
 
+import com.entity.Like;
+
 import com.service.LikeDao;
 import com.service.VideoDao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +26,16 @@ public class LikeController {
 	// Add a like
 	@PostMapping("/addLike")
 	public ResponseEntity<Map<String, Object>> addLike(@RequestParam("videoId") int videoId, @RequestParam("userId") int userId) {
-		likeService.addLike(videoId, userId);
-		videoService.incrementLikes(videoId);
+		List<Like> existLike = likeService.getSpecificLike(videoId, userId);
+		if (!existLike.isEmpty()) {
+			likeService.removeLikes(videoId, userId);
+			videoService.decrementLikes(videoId);
+		} else {
+			likeService.addLike(videoId, userId);
+			videoService.incrementLikes(videoId);
+		}
+		
+		
 		// Optionally, retrieve the updated like count
 		Long likeCountLong = likeService.getLikeCountByVideoId(videoId); // Assume this returns a Long
 
@@ -37,7 +48,7 @@ public class LikeController {
 	// Remove a like
 	@DeleteMapping("/remove")
 	public void removeLike(@RequestParam int videoId, @RequestParam int userId) {
-		likeService.removeLike(videoId, userId);
+		likeService.removeLikes(videoId, userId);
 	}
 
 	// Get total likes for a video

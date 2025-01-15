@@ -40,14 +40,10 @@ function loadVideos() {
                 const videoMetaDiv = document.createElement('div');
                 videoMetaDiv.classList.add('video-meta');
 
-                const userAvatar = document.createElement('img');
-                userAvatar.src = video.userAvatar || '/path/to/default-avatar.png';
-                userAvatar.alt = video.username;
 
                 const usernameSpan = document.createElement('span');
                 usernameSpan.textContent = video.username;
 
-                videoMetaDiv.appendChild(userAvatar);
                 videoMetaDiv.appendChild(usernameSpan);
 
                 const videoStatsDiv = document.createElement('div');

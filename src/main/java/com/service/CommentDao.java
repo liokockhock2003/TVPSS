@@ -27,6 +27,14 @@ public class CommentDao {
             entityManager.remove(comment);
         }
     }
+    
+    // Delete a comment by video ID
+    public void deleteCommentByVideoId(int videoId) {
+        Comment comment = entityManager.find(Comment.class, videoId);
+        if (comment != null) {
+            entityManager.remove(comment);
+        }
+    }
 
     // Get all comments for a specific video
     public List<Comment> getCommentsByVideoId(int videoId) {

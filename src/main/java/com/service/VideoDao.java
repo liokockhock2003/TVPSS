@@ -90,6 +90,11 @@ public class VideoDao {
 		String hql = "UPDATE Video v SET v.comments = v.comments + 1 WHERE v.id = :videoId";
 		entityManager.createQuery(hql).setParameter("videoId", videoId).executeUpdate();
 	}
+	
+	public void decrementLikes(int videoId) {
+	    String hql = "UPDATE Video v SET v.likes = v.likes - 1 WHERE v.id = :videoId";
+	    entityManager.createQuery(hql).setParameter("videoId", videoId).executeUpdate();
+	}
 
 	// Delete a video
 	public void deleteVideo(int id) {
