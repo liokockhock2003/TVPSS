@@ -154,19 +154,23 @@ body {
 }
 
 .status {
-	padding: 5px 10px;
-	border-radius: 4px;
-	font-size: 0.9em;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	display: inline-block;
+	min-width: 120px; /* Set fixed minimum width */
+	text-align: center; /* Center the text */
 }
 
 .status.available {
-	background: #a8e6cf;
-	color: #2d3436;
+	background: #166534;
+	color: #dcfce7;
 }
 
 .status.not-available {
-	background: #ff8b94;
-	color: #fff;
+	background: #c53030;
+	color: #ffe9e9;
 }
 
 .breadcrumb {
@@ -211,19 +215,19 @@ body {
 							alt="School Logo">
 					</div>
 					<div class="school-info">
-						<h1>SK TAMAN BUKIT DAHLIA</h1>
-						<p class="school-code">JB 3003</p>
-						<p class="school-address">Persiaran Dahlia 1</p>
-						<p class="school-location">81700 Pasir Gudang</p>
-						<p class="school-state">Johor</p>
+						<h1>${school.name}</h1>
+						<p class="school-address">${school.address}</p>
 					</div>
 				</div>
 
 				<!-- Tabs Navigation -->
 				<div class="tabs">
-					<button class="tab active">TVPSS Status</button>
-					<button class="tab">Activity Log</button>
+					<!-- Button that links to the school profile page based on school ID -->
+					<a
+						href="${pageContext.request.contextPath}/school-review/${school.id}"
+						class="manage-btn"> Application Status </a>
 				</div>
+
 
 				<!-- TVPSS Status Content -->
 				<div class="tab-content">
@@ -233,53 +237,20 @@ body {
 								<tr>
 									<th>No.</th>
 									<th>Criteria</th>
-									<th>Check</th>
+									<th>Availability</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>There is a Name (Brand)</td>
-									<td><span class="status available">Available</span></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Logo</td>
-									<td><span class="status available">Available</span></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Corner / Mini Studio / TV Studio</td>
-									<td><span class="status available">Available</span></td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>In-School Recording</td>
-									<td><span class="status available">Available</span></td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>Upload on Youtube</td>
-									<td><span class="status available">Available</span></td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td>Recording inside and outside the school</td>
-									<td><span class="status not-available">Not
-											Available</span></td>
-								</tr>
-								<tr>
-									<td>7</td>
-									<td>Collabirate with external agencies</td>
-									<td><span class="status not-available">Not
-											Available</span></td>
-								</tr>
-								<tr>
-									<td>8</td>
-									<td>Using 'Green Screen' Technology</td>
-									<td><span class="status not-available">Not
-											Available</span></td>
-								</tr>
+								<!-- Loop through tvpssStatuses and display them dynamically -->
+								<c:forEach items="${tvpssStatuses}" var="status">
+									<tr>
+										<td>${status.criteriaNo}</td>
+										<td>${status.criteriaName}</td>
+										<td><span
+											class="status ${status.availability ? 'available' : 'not-available'}">
+												${status.availability ? 'Available' : 'Not Available'} </span></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

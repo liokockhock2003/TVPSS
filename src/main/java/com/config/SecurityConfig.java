@@ -133,7 +133,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll())   
                 .csrf(csrf -> csrf
                         .ignoringAntMatchers("/videos/upload")
+                        .ignoringAntMatchers("/updateSubmission"));
                         .ignoringAntMatchers("/news/add"));
+
     }
 }
 // end class

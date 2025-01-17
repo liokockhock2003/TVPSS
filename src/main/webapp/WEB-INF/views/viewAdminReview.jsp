@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS School Status Review</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -181,6 +183,43 @@ body {
 	width: 100%;
 	margin-top: 10px;
 }
+
+/* Updated styles for buttons beside each other */
+.review-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.review-actions button {
+	margin: 0; /* Ensure there's no extra margin between buttons */
+}
+
+.submit-section {
+	display: none; /* Hide the submit button below the table */
+}
+
+.status-pill.pending {
+	background-color: #ffd700; /* Yellow for Pending */
+	color: #333;
+}
+
+.status-pill.reviewed {
+	background-color: #48bb78; /* Green for Reviewed */
+	color: white;
+}
+
+.manage-btn {
+	background-color: #9c27b0;
+	color: white;
+	border: none;
+	padding: 6px 16px;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+}
+
+.tabs {
+	margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
@@ -203,7 +242,8 @@ body {
 					BUKIT DAHLIA
 				</div>
 
-				<!-- School Profile Header (same as previous version) -->
+
+				<!-- School Profile Header -->
 				<div class="school-profile-header">
 					<div class="school-logo">
 						<img
@@ -211,208 +251,222 @@ body {
 							alt="School Logo">
 					</div>
 					<div class="school-info">
-						<h1>SK TAMAN BUKIT DAHLIA</h1>
-						<p class="school-code">JB 3003</p>
-						<p class="school-address">Persiaran Dahlia 1</p>
-						<p class="school-location">81700 Pasir Gudang</p>
-						<p class="school-state">Johor</p>
+						<h1>${school.name}</h1>
+						<p class="school-address">${school.address}</p>
 					</div>
 				</div>
-
-				<!-- Admin Review Form -->
-				<form id="adminReviewForm">
-					<div class="criteria-table">
-						<table>
-							<thead>
-								<tr>
-									<th>No.</th>
-									<th>Criteria</th>
-									<th>Proof</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Criteria 1: Name (Brand) -->
-								<tr class="criteria-row">
-									<td>1</td>
-									<td>There is a Name (Brand)</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="1">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="1">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 2: Logo -->
-								<tr class="criteria-row">
-									<td>2</td>
-									<td>Logo</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="2">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="2">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Repeat for other criteria (3-8) -->
-								<tr class="criteria-row">
-									<td>3</td>
-									<td>Corner / Mini Studio / TV Studio</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="3">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="3">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 3: Corner / Mini Studio / TV Studio -->
-								<tr class="criteria-row">
-									<td>3</td>
-									<td>Corner / Mini Studio / TV Studio</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="3">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="3">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 4: In-School Recording -->
-								<tr class="criteria-row">
-									<td>4</td>
-									<td>In-School Recording</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="4">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="4">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 5: Upload on Youtube -->
-								<tr class="criteria-row">
-									<td>5</td>
-									<td>Upload on Youtube</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="5">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="5">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 6: Recording inside and outside the school -->
-								<tr class="criteria-row">
-									<td>6</td>
-									<td>Recording inside and outside the school</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="6">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="6">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 7: Collaborate with external agencies -->
-								<tr class="criteria-row">
-									<td>7</td>
-									<td>Collaborate with external agencies</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="7">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="7">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-
-								<!-- Criteria 8: Using 'Green Screen' Technology -->
-								<tr class="criteria-row">
-									<td>8</td>
-									<td>Using 'Green Screen' Technology</td>
-									<td><img class="proof-image"
-										src="${pageContext.request.contextPath}/resources/proof-placeholder.jpg"
-										alt="Proof Image"></td>
-									<td>
-										<div class="review-actions">
-											<button type="button" class="btn btn-success btn-approve"
-												data-criteria="8">Approve</button>
-											<button type="button" class="btn btn-danger btn-reject"
-												data-criteria="8">Reject</button>
-										</div> <textarea class="form-control review-comments" rows="3"
-											placeholder="Comments (optional)"></textarea>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-					<div class="submit-section">
-						<button type="submit" class="btn btn-primary">Submit
-							Final Review</button>
-					</div>
-				</form>
 			</div>
-		</div>
+			
+			<!-- Tabs Navigation -->
+				<div class="tabs">
+					<!-- Button that links to the school profile page based on school ID -->
+					<a
+						href="${pageContext.request.contextPath}/school-profile/${school.id}"
+						class="manage-btn">TVPSS Details</a>
+				</div>
 
-		<!-- Full Image Preview Modal -->
-		<div class="full-image-preview">
-			<img src="" alt="Full Image Preview">
+			<!-- Admin Review Form -->
+			<form id="adminReviewForm" method="POST"
+				action="${pageContext.request.contextPath}/updateStatus">
+				<div class="row">
+					<!-- Criteria Table Section -->
+					<div class="col-12 col-md-8">
+						<div class="criteria-table">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Criteria</th>
+										<th>Proof</th>
+										<th>Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="status" items="${tvpssStatuses}">
+										<tr>
+											<td>${status.criteriaNo}</td>
+											<td>${status.criteriaName}</td>
+											<td><img class="proof-image" src="${status.proofImage}"
+												alt="Proof Image"
+												onclick="previewImage('${status.proofImage}')"></td>
+											<td><c:choose>
+													<c:when test="${status.status eq 'PENDING'}">
+														<span class="badge bg-warning">PENDING</span>
+													</c:when>
+													<c:otherwise>
+														<span class="badge bg-success">REVIEWED</span>
+													</c:otherwise>
+												</c:choose></td>
+											<td>
+												<!-- Action Buttons (Approve/Reject) -->
+												<form method="POST"
+													action="${pageContext.request.contextPath}/updateStatus"
+													class="d-inline-block">
+													<input type="hidden" name="id" value="${status.id}">
+													<input type="hidden" name="status" value="APPROVED">
+													<input type="hidden" name="schoolId" value="${school.id}">
+													<input type="hidden" name="version"
+														value="${school.version}"> <input type="hidden"
+														id="csrf-token" name="${_csrf.parameterName}"
+														value="${_csrf.token}" />
+													<button type="submit"
+														class="btn btn-success btn-sm btn-block mb-2"
+														${status.status ne 'PENDING' ? 'disabled' : ''}>Approve</button>
+												</form>
+												<form method="POST"
+													action="${pageContext.request.contextPath}/updateStatus"
+													class="d-inline-block">
+													<input type="hidden" name="id" value="${status.id}">
+													<input type="hidden" name="status" value="REJECTED">
+													<input type="hidden" name="schoolId" value="${school.id}">
+													<input type="hidden" name="version"
+														value="${school.version}"> <input type="hidden"
+														id="csrf-token" name="${_csrf.parameterName}"
+														value="${_csrf.token}" />
+													<button type="submit"
+														class="btn btn-danger btn-sm btn-block mb-2"
+														${status.status ne 'PENDING' ? 'disabled' : ''}>Reject</button>
+												</form>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Version Selector Section -->
+					<div class="col-12 col-md-4">
+						<div class="card">
+							<div class="card-header">
+								<h5>Select Version</h5>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<form method="POST"
+										action="${pageContext.request.contextPath}/updateVersion">
+										<input type="hidden" id="csrf-token"
+											name="${_csrf.parameterName}" value="${_csrf.token}" /> <input
+											type="hidden" name="schoolId" value="${school.id}"> <label
+											for="version">Choose the version</label> <select id="version"
+											name="version" class="form-control">
+											<option value="1" ${school.version == 1 ? 'selected' : ''}>Version
+												1</option>
+											<option value="2" ${school.version == 2 ? 'selected' : ''}>Version
+												2</option>
+											<option value="3" ${school.version == 3 ? 'selected' : ''}>Version
+												3</option>
+											<option value="4" ${school.version == 4 ? 'selected' : ''}>Version
+												4</option>
+										</select>
+								</div>
+							</div>
+							<div class="card-footer">
+								<button type="submit" class="btn btn-primary btn-block">Update
+									Version</button>
+
+							</div>
+			</form>
+		</div>
+		<!-- Separate Instruction/Note Box -->
+		<div class="col-12 mt-4">
+			<div class="card">
+				<div class="card-header">
+					<h5>Important Note</h5>
+				</div>
+				<div class="card-body">
+					<p class="text-muted" style="font-size: 0.875rem;">Please
+						ensure that all information is accurate before proceeding with the
+						update. If you encounter any issues, do not hesitate to reach out
+						to the support team for assistance.</p>
+
+					<!-- 9x5 Table inside the Note Box -->
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Criteria</th>
+								<th>Version 1</th>
+								<th>Version 2</th>
+								<th>Version 3</th>
+								<th>Version 4</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td></td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td></td>
+								<td>/</td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td></td>
+								<td></td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td></td>
+								<td></td>
+								<td>/</td>
+								<td>/</td>
+							</tr>
+							<tr>
+								<td>8</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>/</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
+	<script>
+		// Function to show image in full preview
+		function previewImage(imageUrl) {
+			var previewModal = document.getElementById('fullImagePreview');
+			var previewImage = document.getElementById('previewImage');
+			previewImage.src = imageUrl;
+			previewModal.style.display = 'flex';
+		}
+	</script>
 </body>
 </html>
