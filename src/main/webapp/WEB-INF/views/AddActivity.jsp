@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Activity - TVPSS</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -128,54 +130,43 @@ body {
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/sidebar/sidebarTeacher.jsp" />
 
+		<!-- Main Content -->
 		<div class="main-content">
 			<!-- User Section -->
 			<div class="user-section">
 				<div class="user-avatar"></div>
 				<span>Katie Pena (Admin)</span>
 			</div>
-
-			<!-- Search Bar -->
+	
 			<!-- Search Bar -->
 			<input type="text" class="search-bar" placeholder="Search...">
-
+			
+			<!-- Add Activity Form -->
 			<h4 class="mb-4">Add Activity</h4>
-
-			<!-- Main Content -->
 			<div class="form-container">
-				<form action="submitActivity.jsp" method="post"
-					enctype="multipart/form-data">
-					<!-- Upload Image Section -->
-					<label for="file-upload" class="file-upload" id="file-upload-label">
-						<input id="file-upload" type="file" name="image"
-						style="display: none;" accept="image/*">
-						<p>Upload Image</p>
-						<p style="font-size: small;">Select File</p>
-					</label>
-
-					<!-- Activity Details Section -->
-					<h5>Details</h5>
-
-					<label for="title">Title (required)</label> <input type="text"
-						id="title" name="title" required> <label for="date">Date
-						(required)</label> <input type="date" id="date" name="date" required>
-
+				<form action="${pageContext.request.contextPath}/activities"
+					method="post">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<!-- Other form fields -->
+					<label for="title">Title (required)</label> 
+					<input type="text" id="title" name="title" required> 
+					<label for="date">Date (required)</label> 
+					<input type="date" id="date" name="date" required>
+					<label for="place">Place (required)</label> 
+					<input type="text" id="place" name="place" required> 
+					<label for="maxParticipants">Max Participants (required)</label> 
+					<input type="number" id="maxParticipants" name="maxParticipants" required>
 					<label for="description">Description (required)</label>
 					<textarea id="description" name="description" rows="4" required></textarea>
 
-					<!-- Save Button -->
 					<button type="submit">Save</button>
 				</form>
+
 			</div>
 		</div>
 	</div>
 
-	<script>
-		// Add event listener to file upload label for better interaction
-		document.getElementById("file-upload-label").addEventListener("click", () => {
-			document.getElementById("file-upload").click();
-		});
-	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
