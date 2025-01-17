@@ -42,4 +42,11 @@ public class SchoolDao {
             getCurrentSession().delete(school);
         }
     }
+    
+    @Transactional
+    public void updateSchool(School school) {
+    	if(school != null) {
+    		getCurrentSession().update(school);
+    	}
+    }
 }

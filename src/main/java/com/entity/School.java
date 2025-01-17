@@ -5,50 +5,73 @@ import javax.persistence.*;
 @Entity
 @Table(name = "schools")
 public class School {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false, name = "id")
-	private int id;
 
-	@Column(nullable = false, name = "name")
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "id")
+    private int id;
 
-	@Column(columnDefinition = "TEXT", name = "address")
-	private String address;
+    @Column(nullable = false, name = "name")
+    private String name;
 
-	@Column(name = "logo_path")
-	private String logoPath;
+    @Column(columnDefinition = "TEXT", name = "address")
+    private String address;
 
-	// Getters and setters
-	public int getId() {
-		return id;
-	}
+    @Column(name = "logo_path")
+    private String logoPath;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(name = "version")
+    private int version;  // New column 'version'
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "status")
+    private boolean status;  // New column 'status'
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    // Getters and setters
+    public int getId() {
+        return id;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getLogoPath() {
-		return logoPath;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setLogoPath(String logoPath) {
-		this.logoPath = logoPath;
-	}
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLogoPath() {
+        return logoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

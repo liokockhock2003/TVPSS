@@ -21,21 +21,21 @@ import com.service.VideoDao;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/school-review")
-	@ResponseBody()
-	public ModelAndView schoolReview() {
-		ModelAndView modelAndView = new ModelAndView("viewAdminReview");
-		modelAndView.addObject("currentPage", "viewSchoolList");
-		return modelAndView;
-	}
+//	@RequestMapping("/school-review")
+//	@ResponseBody()
+//	public ModelAndView schoolReview() {
+//		ModelAndView modelAndView = new ModelAndView("viewAdminReview");
+//		modelAndView.addObject("currentPage", "viewSchoolList");
+//		return modelAndView;
+//	}
 
-	@RequestMapping("/school-submission")
-	@ResponseBody()
-	public ModelAndView schoolVersionCheck() {
-		ModelAndView modelAndView = new ModelAndView("viewVersionCheck");
-		modelAndView.addObject("currentPage", "viewVersionCheck");
-		return modelAndView;
-	}
+//	@RequestMapping("/school-submission")
+//	@ResponseBody()
+//	public ModelAndView schoolVersionCheck() {
+//		ModelAndView modelAndView = new ModelAndView("viewVersionCheck");
+//		modelAndView.addObject("currentPage", "viewVersionCheck");
+//		return modelAndView;
+//	}
 
 	@RequestMapping("/school-profile")
 	@ResponseBody()
@@ -45,13 +45,13 @@ public class HomeController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/school-list")
-	@ResponseBody()
-	public ModelAndView schoolList() {
-		ModelAndView modelAndView = new ModelAndView("viewSchoolList");
-		modelAndView.addObject("currentPage", "viewSchoolList");
-		return modelAndView;
-	}
+//	@RequestMapping("/school-list")
+//	@ResponseBody()
+//	public ModelAndView schoolList() {
+//		ModelAndView modelAndView = new ModelAndView("viewSchoolList");
+//		modelAndView.addObject("currentPage", "viewSchoolList");
+//		return modelAndView;
+//	}
 
 	@RequestMapping("/validate-video")
 	public ModelAndView validateVideo() {
