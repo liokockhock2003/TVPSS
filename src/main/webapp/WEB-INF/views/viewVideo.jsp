@@ -128,44 +128,143 @@ video::-webkit-media-controls {
 	border-radius: 2px;
 	cursor: pointer;
 }
-
-/* Video Info Styles */
+/* Main Video Info Container */
 .video-info {
-	max-width: 1200px;
-	margin: 20px auto;
-	background-color: white;
-	padding: 20px;
-	border-radius: 12px;
+    max-width: 1280px;
+    margin: 24px auto;
+    padding: 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
 }
 
+/* Video Title */
 .video-title {
-	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 15px;
+   font-size: 24px;
+   font-weight: 600;
+   color: #0f172a;
+   margin-bottom: 12px;
+   line-height: 1.3;
 }
 
-.video-stats {
-	display: flex;
-	align-items: center;
-	gap: 20px;
-	margin-bottom: 20px;
-	color: #666;
-}
-
+/* Action Buttons Container */
 .action-buttons {
-	display: flex;
-	gap: 15px;
+   display: flex;
+   gap: 8px;
+   margin: 16px 0;
 }
 
+/* Like Button Styling */
 .action-btn {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 20px;
-	background-color: #f0f0f0;
-	cursor: pointer;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   padding: 8px 16px;
+   background-color: #f8fafc;
+   border: 1px solid #e2e8f0;
+   border-radius: 24px;
+   font-size: 14px;
+   font-weight: 500;
+   color: #475569;
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+   background-color: #f1f5f9;
+   transform: translateY(-1px);
+}
+
+.action-btn:active {
+   transform: translateY(0);
+}
+
+/* Video Stats */
+.video-stats {
+   display: flex;
+   gap: 16px;
+   color: #64748b;
+   font-size: 14px;
+   margin-bottom: 16px;
+}
+
+/* Channel Section */
+.channel-info {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   padding: 16px 0;
+   border-top: 1px solid #e2e8f0;
+   border-bottom: 1px solid #e2e8f0;
+   margin: 16px 0;
+}
+
+.channel-avatar {
+   width: 48px;
+   height: 48px;
+   border-radius: 50%;
+   background-color: #e2e8f0;
+   flex-shrink: 0;
+}
+
+.channel-details {
+   flex-grow: 1;
+}
+
+.channel-name {
+   font-size: 16px;
+   font-weight: 500;
+   color: #0f172a;
+   margin-bottom: 4px;
+}
+
+/* Video Description */
+.video-description {
+   margin-top: 20px;
+   color: #334155;
+   line-height: 1.6;
+}
+
+.video-description p {
+   margin: 0;
+   white-space: pre-wrap;
+   font-size: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+   .video-info {
+       padding: 0 16px;
+   }
+
+   .video-title {
+       font-size: 20px;
+   }
+
+   .action-buttons {
+       flex-wrap: wrap;
+   }
+
+   .video-stats {
+       flex-direction: column;
+       gap: 8px;
+   }
+
+   .channel-info {
+       padding: 12px 0;
+   }
+}
+
+/* Like Count Animation */
+@keyframes likePopup {
+   0% { transform: scale(1); }
+   50% { transform: scale(1.2); }
+   100% { transform: scale(1); }
+}
+
+.like-animation {
+   animation: likePopup 0.3s ease;
 }
 
 /* Channel Info Styles */
@@ -231,133 +330,146 @@ video::-webkit-media-controls {
 	border-radius: 3px;
 }
 
-/* Comment styling */
-.comment {
-	display: flex;
-	align-items: flex-start;
-	gap: 10px; padding : 16px 0;
-	border-bottom: 1px solid #e1e4e8;
-	transition: background-color 0.2s ease;
-	padding: 16px 0
+/* Main Comments Section */
+.comments-section {
+    max-width: 1280px;
+    margin: 24px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    padding: 15px;
 }
 
-.comment:hover {
-	background-color: #f8fafc;
-}
-
-.comment:last-child {
-	border-bottom: none;
-}
-
-/* Comment content */
-.comment-content {
-	flex-grow: 1;
-}
-
-.comment-author {
-	font-weight: 600;
-	font-size: 15px;
-	color: #1a1a1a;
-	margin-bottom: 6px;
-}
-
-.comment-text {
-	font-size: 14px;
-	line-height: 1.5;
-	color: #4a5568;
-	word-wrap: break-word;
-	word-break: break-word;
-}
-
-/* Comment input section */
-.comment-input {
-	display: flex;
-	align-items: center;
-	gap: 10px; padding : 16px; background-color : #ffffff;
-	border: 1px solid #e1e4e8;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-	background-color: #ffffff;
-	padding: 16px;
-}
-
+/* Comments Header */
 .comments-header {
-	padding-bottom: 16px;
-	border-bottom: 1px solid #e1e4e8;
-	margin-bottom: 16px;
+   padding: 16px;
+   margin-bottom: 24px;
+   border-bottom: 1px solid #e2e8f0;
 }
 
 #comments-count {
-	font-size: 20px;
-	font-weight: 700;
-	color: #1a1a1a;
+   font-size: 16px;
+   font-weight: 600;
+   color: #0f172a;
 }
 
-/* Input field */
+/* Comment Input Section */
+.comment-input {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   margin-bottom: 32px;
+   padding-bottom: 24px;
+   border-bottom: 1px solid #e2e8f0;
+}
+
+.comment-input h3 {
+   margin: 0;
+   font-size: 16px;
+   font-weight: 600;
+   color: #1f2937;
+}
+
+.user-avatar img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
 #comment-text {
-	flex-grow: 1;
-	padding: 12px 16px;
-	font-size: 14px;
-	line-height: 1.5;
-	border: 1px solid #e1e4e8;
-	border-radius: 6px;
-	margin-right: 12px;
-	transition: all 0.2s ease;
-	background-color: #f8fafc;
+   flex-grow: 1;
+   padding: 12px 16px;
+   border: none;
+   border-bottom: 2px solid #e2e8f0;
+   font-size: 14px;
+   background: transparent;
+   transition: all 0.2s ease;
 }
 
 #comment-text:focus {
-	border-color: #3b82f6;
-	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-	background-color: #ffffff;
-	outline: none;
+   outline: none;
+   border-bottom-color: #3b82f6;
 }
 
 #comment-text::placeholder {
-	color: #94a3b8;
+   color: #94a3b8;
 }
 
-/* Submit button */
 #submit-comment-btn {
-	padding: 10px 20px;
-	background-color: #3b82f6;
-	color: #ffffff;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	font-weight: 500;
-	transition: all 0.2s ease;
-	white-space: nowrap;
+   padding: 8px 20px;
+   background-color: #3b82f6;
+   color: white;
+   border: none;
+   border-radius: 20px;
+   font-size: 14px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: all 0.2s ease;
 }
 
 #submit-comment-btn:hover {
-	background-color: #2563eb;
-	transform: translateY(-1px);
-	box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+   background-color: #2563eb;
+   transform: translateY(-1px);
 }
 
 #submit-comment-btn:active {
-	transform: translateY(0);
-	box-shadow: none;
+   transform: translateY(0);
+}
+
+/* Comments List */
+#comments-list {
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+}
+
+.comment {
+   padding: 16px;
+   border-bottom: 1px solid #e5e7eb;
+   transition: background-color 0.2s ease;
+}
+
+.comment:hover {
+   background-color: #f8fafc;
+}
+
+.comment:last-child {
+   border-bottom: none;
+}
+
+.comment-content {
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+}
+
+.comment-author {
+   font-weight: 600;
+   font-size: 14px;
+   color: #1f2937;
+}
+
+.comment-text {
+   font-size: 14px;
+   line-height: 1.5;
+   color: #4b5563;
+   word-wrap: break-word;
 }
 
 /* Responsive adjustments */
-@media ( max-width : 640px) {
-	.comment-input {
-		flex-direction: column;
-		align-items: stretch;
-	}
-	.user-avatar img {
-		width: 36px;
-		height: 36px;
-	}
-	#comment-text {
-		margin: 12px 0;
-	}
-	#submit-comment-btn {
-		width: 100%;
-	}
+@media (max-width: 640px) {
+   .comment {
+       padding: 12px;
+   }
+   
+   .comment-author {
+       font-size: 13px;
+   }
+   
+   .comment-text {
+       font-size: 13px;
+   }
 }
 </style>
 </head>
@@ -411,13 +523,13 @@ video::-webkit-media-controls {
 			</div>
 
 			<div class="channel-info">
-				<div class="channel-avatar"></div>
 				<div class="channel-details">
 					<div class="channel-name">${teacher.name}</div>
 				</div>
 			</div>
 
 			<div class="video-description">
+				<h2>Description</h2>
 				<p>${video.description}</p>
 			</div>
 		</div>
@@ -426,9 +538,7 @@ video::-webkit-media-controls {
 		<div class="comments-section">
 			<!-- Comment Input Section -->
 			<div class="comment-input">
-				<div class="user-avatar">
-					<img src="" alt="" />
-				</div>
+				<h3>${sessionUser.name}</h3>
 				<input type="hidden" id="video-id" value="${video.id}" /> <input
 					type="hidden" id="user-id" value="${user.id}" /> <input
 					type="hidden" id="csrf-token" name="${_csrf.parameterName}"

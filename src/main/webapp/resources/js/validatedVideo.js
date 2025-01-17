@@ -13,15 +13,31 @@ function loadValidatedVideos() {
 				const row = document.createElement('tr');
 
 				row.innerHTML = `
-                    <td>${index + 1}.</td>
-                    <td><img src="${video.thumbnail}" class="video-thumbnail" alt="${video.title}"></td>
-                    <td>
-                        <span>${video.title}</span><br>${video.school}
-                    </td>
-                    <td class="action-buttons">
-                        <button class="btn btn-approve" disabled>${video.status}</button>
-                    </td>
-                `;
+				   <td>${index + 1}.</td>
+				   <td>
+				       <div class="video-preview">
+				           <img src="${video.thumbnail}" class="video-thumbnail" alt="${video.title}">
+				           <span class="duration">${video.duration || "00:00"}</span>
+				       </div>
+				   </td>
+				   <td>
+				       <div class="video-info">
+				           <span class="video-title">${video.title}</span>
+				           <div class="video-meta">
+				               <span class="teacher-name">${video.teacherName}</span>
+				               <span class="school-name">${video.schoolName}</span>
+				           </div>
+				       </div>
+				   </td>
+				   <td class="description-cell">
+				       <div class="video-description">
+				           ${video.description || 'No description available'}
+				       </div>
+				   </td>
+				   <td class="action-buttons">
+				       <button class="btn btn-approve" disabled>${video.status}</button>
+				   </td>
+				`;
 				tableBody.appendChild(row);
 			});
 		})

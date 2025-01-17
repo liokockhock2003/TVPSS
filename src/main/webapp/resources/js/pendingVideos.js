@@ -32,21 +32,34 @@ document.addEventListener("DOMContentLoaded", () => {
 	const createVideoRow = (video, index) => {
 		const row = document.createElement("tr");
 		row.innerHTML = `
-            <td>${index + 1}.</td>
-            <td>
-                <img src="${video.thumbnail}" 
-                     class="video-thumbnail" 
-                     alt="Video"
-                     onerror="this.src='https://via.placeholder.com/200x120'">
-            </td>
-            <td>
-                <span>${video.title}</span><br>
-                ${video.school}
-            </td>
-            <td class="action-buttons">
-                <button class="btn btn-approve">Approve</button>
-                <button class="btn btn-reject">Reject</button>
-            </td>`;
+		   <td>${index + 1}.</td>
+		   <td>
+		       <div class="video-preview">
+		           <img src="${video.thumbnail}"
+		               class="video-thumbnail"
+		               alt="Video"
+		               onerror="this.src='https://via.placeholder.com/200x120'">
+		           <span class="duration">${video.duration || "00:00"}</span>
+		       </div>
+		   </td>
+		   <td>
+		       <div class="video-details">
+		           <span class="video-title">${video.title}</span>
+		           <div class="meta-info">
+		               <span class="teacher-name">${video.teacherName}</span>
+		               <span class="school-name">${video.schoolName}</span>
+		           </div>
+		       </div>
+		   </td>
+		   <td class="description-cell">
+		       <div class="video-description">
+		           ${video.description || 'No description provided'}
+		       </div>
+		   </td>
+		   <td class="action-buttons">
+		       <button class="btn btn-approve">Approve</button>
+		       <button class="btn btn-reject">Reject</button>
+		   </td>`;
 
 		// Add event listeners for approve/reject buttons
 		const approveBtn = row.querySelector('.btn-approve');

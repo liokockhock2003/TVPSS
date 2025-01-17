@@ -1,5 +1,8 @@
 package com.config;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,9 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.entity.Users;
+import com.service.StudentDao;
+import com.service.TeacherDao;
 import com.service.UserDao;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -18,6 +24,12 @@ import com.service.UserDao;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private StudentDao studentDao;
+	
+	@Autowired
+	private TeacherDao teacherDao;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -74,12 +86,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     .orElse("");
                             request.getSession().setAttribute("role", role); 
                             
+                         
+                            Users user = new Users();
+                            
+                         // Retrieve the user ID and store it in the session
+                            Object principal = authentication.getPrincipal();
+                            if (principal instanceof org.springframework.security.core.userdetails.User) {
+                                String username = ((org.springframework.security.core.userdetails.User) principal).getUsername();
+                                user = userDao.findByUsername(username);  // Fetch the user object from the database
+                                if (user != null) {
+                                    request.getSession().setAttribute("userId", user.getId());  // Store the user ID in the session
+                                }
+                            }
+                            
                          // Redirect users based on their roles
                             switch (role) {
                                 case "STUDENT":
+                                	request.getSession().setAttribute("name", studentDao.getStudentByUserId(user.getId()).getName());
                                     response.sendRedirect("http://localhost:8080/TVPSS-1/student-library-student");
                                     break;
                                 case "TEACHER":
+                                	request.getSession().setAttribute("name", teacherDao.getTeacherByUserId(user.getId()).getName());
                                     response.sendRedirect("http://localhost:8080/TVPSS-1/dashboard");
                                     break;
                                 case "ADMIN":
@@ -89,23 +116,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     response.sendRedirect("/"); // Redirect to a default page if no role is matched
                                     break;
                             }
-                            
-                         // Retrieve the user ID and store it in the session
-                            Object principal = authentication.getPrincipal();
-                            if (principal instanceof org.springframework.security.core.userdetails.User) {
-                                String username = ((org.springframework.security.core.userdetails.User) principal).getUsername();
-                                Users user = userDao.findByUsername(username);  // Fetch the user object from the database
-                                if (user != null) {
-                                    request.getSession().setAttribute("userId", user.getId());  // Store the user ID in the session
-                                }
-                            }
                         })
                         
                         .loginPage("/login")
-                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
-                        .permitAll())
+                        .logoutUrl("/logout")           // This matches our controller method
+                        .logoutSuccessUrl("/login?logout")  // Where to go after logout
+                        .invalidateHttpSession(true)    // Make sure to invalidate session
+                        .deleteCookies("JSESSIONID")    // Clear cookies
+                        .permitAll())   
                 .csrf(csrf -> csrf
                         .ignoringAntMatchers("/videos/upload"));
     }

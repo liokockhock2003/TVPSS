@@ -3,9 +3,13 @@ package com.controller;
 import com.entity.Users;
 
 import com.entity.Video;
+import com.entity.School;
+import com.entity.Student;
 import com.entity.Teacher;
 import com.service.CommentDao;
 import com.service.LikeDao;
+import com.service.SchoolDao;
+import com.service.StudentDao;
 import com.service.TeacherDao;
 import com.service.UserDao;
 import com.service.VideoDao;
@@ -21,10 +25,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -32,7 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,6 +55,12 @@ public class VideoController {
 	
 	@Autowired
 	private TeacherDao teacherService;
+	
+	@Autowired
+	private StudentDao studentService;
+	
+	@Autowired
+	private SchoolDao schoolService;
 	
 	@Autowired
     private HttpSession session;
@@ -278,9 +285,20 @@ public class VideoController {
 	@RequestMapping("/viewVideo")
 	public String viewVideo(@RequestParam("id") int videoId, Model model) {
 	    // Fetch video by ID using the video service
+		Integer id = (Integer) session.getAttribute("userId");
+		Users sessionUser = userService.findById(id);
+		
+		if ("STUDENT".equals(sessionUser.getRole())) {
+	        Student sessionStudent = studentService.getStudentByUserId(id);
+	        model.addAttribute("sessionUser", sessionStudent);
+	    } else if ("TEACHER".equals(sessionUser.getRole())) {
+	        Teacher sessionTeacher = teacherService.getTeacherByUserId(id);
+	        model.addAttribute("sessionUser", sessionTeacher);
+	    }
+		
 		videoService.incrementViews(videoId);
 	    Video video = videoService.getVideoById(videoId);
-	    Users user = userService.findById(video.getUserId());
+	    Users user = userService.findById(sessionUser.getId());
 	    Teacher teacher = teacherService.getTeacherByUserId(video.getUserId());
 	    
 	    // Format the upload date
@@ -306,11 +324,16 @@ public class VideoController {
 	    List<Map<String, String>> videoMaps = new ArrayList<>();
 	    
 	    for (Video video : pendingVideos) {
+	    	Teacher teacher = teacherService.getTeacherByUserId(video.getUserId());
+	    	School school = schoolService.getSchoolById(teacher.getSchool().getId());
 	        videoMaps.add(Map.of(
 	        	"id", String.valueOf(video.getId()),
-	            "thumbnail", video.getThumbnailPath(),
+	        	"duration", video.getDuration() != null ? video.getDuration() : "00:00",
+	        	"teacherName", teacher.getName(),
+	        	"schoolName", school.getName(),
+	        	"thumbnail", video.getThumbnailPath(),
 	            "title", video.getTitle(),
-	            "school", video.getDescription(),
+	            "description", video.getDescription(),
 	            "status", video.getStatus()
 	        ));
 	    }
@@ -346,11 +369,16 @@ public class VideoController {
 	    List<Map<String, String>> videoMaps = new ArrayList<>();
 	    
 	    for (Video video : validatedVideos) {
+	    	Teacher teacher = teacherService.getTeacherByUserId(video.getUserId());
+	    	School school = schoolService.getSchoolById(teacher.getSchool().getId());
 	        videoMaps.add(Map.of(
 	        	"id", String.valueOf(video.getId()),
+	        	"duration", video.getDuration() != null ? video.getDuration() : "00:00",
+	    	    "teacherName", teacher.getName(),
+	    	    "schoolName", school.getName(),
 	            "thumbnail", video.getThumbnailPath(),
 	            "title", video.getTitle(),
-	            "school", video.getDescription(),
+	            "description", video.getDescription(),
 	            "status", video.getStatus()
 	        ));
 	    }

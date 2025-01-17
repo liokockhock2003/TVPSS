@@ -2,7 +2,7 @@
 
 <!-- Sidebar -->
 <div class="sidebar">
-    <a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
+    <a class="logo">TVPSS</a>
    
    
     <a href="${pageContext.request.contextPath}/video-library-student" 

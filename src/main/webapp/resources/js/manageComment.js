@@ -14,40 +14,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Fetch comments from the backend
-    function fetchComments() {
-        fetch(`../comments/video/${videoId}`)
-            .then(response => response.json())
-            .then(comments => {
-                commentsListDiv.innerHTML = ""; // Clear only the comments list
-                updateCommentsCount(comments.length); // Update the count
+	function fetchComments() {
+		fetch(`../comments/video/${videoId}`)
+		       .then(response => response.json())
+		       .then(comments => {
+		           commentsListDiv.innerHTML = "";
+		           updateCommentsCount(comments.length);
 
-                comments.forEach(comment => {
-                    const commentElement = document.createElement("div");
-                    commentElement.classList.add("comment");
+		           comments.forEach(comment => {
+		               const commentElement = document.createElement("div");
+		               commentElement.classList.add("comment");
 
-                    const userAvatarDiv = document.createElement("div");
-                    userAvatarDiv.classList.add("user-avatar");
-                    commentElement.appendChild(userAvatarDiv);
+		               commentElement.innerHTML = `
+		                   <div class="comment-content">
+		                       <div class="comment-author">${comment.username}</div>
+		                       <div class="comment-text">${comment.comment}</div>
+		                   </div>
+		               `;
 
-                    const commentContentDiv = document.createElement("div");
-                    commentContentDiv.classList.add("comment-content");
-
-                    const commentAuthorDiv = document.createElement("div");
-                    commentAuthorDiv.classList.add("comment-author");
-                    commentAuthorDiv.textContent = comment.username;
-                    commentContentDiv.appendChild(commentAuthorDiv);
-
-                    const commentTextDiv = document.createElement("div");
-                    commentTextDiv.classList.add("comment-text");
-                    commentTextDiv.textContent = comment.comment;
-                    commentContentDiv.appendChild(commentTextDiv);
-
-                    commentElement.appendChild(commentContentDiv);
-                    commentsListDiv.appendChild(commentElement);
-                });
-            })
-            .catch(error => console.error("Error fetching comments:", error));
-    }
+		               commentsListDiv.appendChild(commentElement);
+		           });
+		       })
+		       .catch(error => console.error("Error fetching comments:", error));
+	    }
 
     // Submit a new comment
     submitCommentBtn.addEventListener("click", function() {
