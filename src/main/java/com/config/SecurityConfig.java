@@ -2,6 +2,7 @@ package com.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,9 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(requests -> requests
                         .antMatchers("/video-library-student").hasRole("STUDENT")
-                        .antMatchers("/joinactivity").hasRole("STUDENT")
+                        .antMatchers("/joinactivity").hasRole("STUDENT") //nanti tukar jadi STUDENT
                         .antMatchers("/view-video").hasAnyRole("STUDENT", "TEACHER")
                         .antMatchers("/forum").hasAnyRole("STUDENT", "TEACHER")
+                        .antMatchers(HttpMethod.GET, "/news/add").hasRole("TEACHER")
+                        .antMatchers("/news/add-news").hasRole("TEACHER")
+                        .antMatchers("/news/edit/**", "/news/delete/**").hasRole("TEACHER")
+                        .antMatchers("/news/**").hasAnyRole("STUDENT", "TEACHER")
                         .antMatchers("/video-upload").hasRole("TEACHER")
                         .antMatchers("/video-library-teacher").hasRole("TEACHER")
                         .antMatchers("/school-submission").hasRole("TEACHER")
@@ -77,10 +82,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                          // Redirect users based on their roles
                             switch (role) {
                                 case "STUDENT":
-                                    response.sendRedirect("http://localhost:8080/TVPSS-1/student-library-student");
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/activities/student-dashboard");
                                     break;
                                 case "TEACHER":
-                                    response.sendRedirect("http://localhost:8080/TVPSS-1/dashboard");
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/activities");
                                     break;
                                 case "ADMIN":
                                     response.sendRedirect("http://localhost:8080/TVPSS-1/validate-video");
@@ -109,6 +114,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf(csrf -> csrf
                         .ignoringAntMatchers("/videos/upload")
                         .ignoringAntMatchers("/updateSubmission"));
+                        .ignoringAntMatchers("/news/add"));
+
     }
 }
 // end class

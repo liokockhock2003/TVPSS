@@ -4,8 +4,8 @@
 <div class="sidebar">
     <a href="${pageContext.request.contextPath}/" class="logo">TVPSS</a>
     
-    <a href="${pageContext.request.contextPath}/dashboard" 
-        class="nav-item ${currentPage == 'dashboard' ? 'active' : ''}">
+    <a href="${pageContext.request.contextPath}/activities" 
+        class="nav-item ${currentPage == 'viewVersionCheck' ? 'active' : ''}">
         <span>💼 Dashboard</span>
     </a>
     <a href="${pageContext.request.contextPath}/video-library-teacher" 
@@ -15,5 +15,10 @@
     <a href="${pageContext.request.contextPath}/school-submission" 
         class="nav-item ${currentPage == 'viewVersionCheck' ? 'active' : ''}">
         <span>🎥 School Submission</span>
+    </a>
+    
+    <a href="${pageContext.request.contextPath}/news"
+		 class="nav-item ${currentPage == 'newsList' ? 'active' : ''}">
+        <span>👥 News</span>
     </a>
 </div>
