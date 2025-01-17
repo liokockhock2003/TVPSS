@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS - Crew & Resource Management</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -233,26 +235,26 @@ body {
 			<div class="profile-header mb-4">
 				<img src="https://via.placeholder.com/120" alt="School Logo">
 				<div>
-					<h4>SK TAMAN BUKIT DAHLIA</h4>
-					<p class="mb-0">
-						JB 3003<br>Jalan Permas Dalam<br>Johor Bahru
-					</p>
+					<h4>${school.name}</h4>
+					<p class="mb-0">${school.address}</p>
 				</div>
 			</div>
 
 			<div class="card">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item"><a class="nav-link " href="manage-school">List
+						<li class="nav-item"><a class="nav-link "
+							href="${pageContext.request.contextPath}/manage-school/crew-page/${schoolId}">List
 								of Crew</a></li>
-						<li class="nav-item"><a class="nav-link active" href="resource-page">List
-								of Resource</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="./${schoolId}">List of Resource</a></li>
 					</ul>
 				</div>
 				<div class="card-body">
 					<div class="d-flex justify-content-between align-items-center mb-3">
-						<button class="manage-btn"> <b>+</b> Add
-							Resource</button>
+						<a
+							href="${pageContext.request.contextPath}/manage-school/add-resource/${schoolId}"
+							class="manage-btn"><b>+</b> Add Resource</a>
 					</div>
 
 					<table class="table table-hover table-striped align-middle">
@@ -261,46 +263,27 @@ body {
 								<th class="text-center">No.</th>
 								<th>Name</th>
 								<th>Type</th>
-								<th class="text-center">Total Amount</th>
+								<th class="text-center">Status</th>
+								<th class="text-center">Availability</th>
 								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${resourceList}" var="resource"
-								varStatus="status">
+							<c:forEach items="${resources}" var="resource" varStatus="status">
 								<tr>
 									<td class="text-center">${status.count}</td>
 									<td>${resource.name}</td>
 									<td>${resource.type}</td>
-									<td class="text-center">${resource.totalAmount}</td>
-									<td class="text-center">
-										<button class="manage-btn">Edit</button>
-										<button class="btn btn-outline-danger btn-sm">Delete</button>
-									</td>
+									<td class="text-center">${resource.status}</td>
+									<td class="text-center">${resource.availability? "Available" : "Used"}</td>
+									<td class="text-center"><a
+										href="${pageContext.request.contextPath}/manage-school/edit-resource/${resource.id}/${schoolId}"
+										class="manage-btn">Edit</a> <a
+										href="${pageContext.request.contextPath}/manage-school/delete-resource/${resource.id}/${schoolId}"
+										class="manage-btn" style="background-color: red"
+										onclick="return confirmDelete();">Delete</a>
 								</tr>
 							</c:forEach>
-
-							<!-- Example static rows (remove when using dynamic data) -->
-							<tr>
-								<td class="text-center">1</td>
-								<td>Sony A7MKII Camera</td>
-								<td>Camera</td>
-								<td class="text-center">1</td>
-								<td class="text-center">
-									<button class="btn btn-outline-secondary btn-sm">Edit</button>
-									<button class="btn btn-outline-danger btn-sm">Delete</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Sony A6400 Camera</td>
-								<td>Camera</td>
-								<td class="text-center">2</td>
-								<td class="text-center">
-									<button class="btn btn-outline-secondary btn-sm">Edit</button>
-									<button class="btn btn-outline-danger btn-sm">Delete</button>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 
@@ -310,5 +293,10 @@ body {
 
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
+			function confirmDelete() {
+				return confirm("Are you sure you want to delete this resource?");
+			}
+		</script>
 </body>
 </html>

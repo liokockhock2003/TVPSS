@@ -52,4 +52,26 @@ public class CrewDao {
             .setParameter("schoolId", schoolId)
             .uniqueResult()).intValue();
     }
+    
+    @Transactional
+    public List<Crew> getCrewsBySchoolId(int schoolId) {
+        return getCurrentSession()
+                .createQuery("SELECT c FROM Crew c "
+                           + "JOIN FETCH c.student s "
+                           + "JOIN FETCH c.school sch "
+                           + "WHERE c.school.id = :schoolId", Crew.class)
+                .setParameter("schoolId", schoolId)
+                .getResultList();
+    }
+    
+    @Transactional
+    public Crew getCrewByCrewId(int crewId) {
+        return getCurrentSession()
+                .createQuery("SELECT c FROM Crew c "
+                           + "JOIN FETCH c.student s "
+                           + "JOIN FETCH c.school sch "
+                           + "WHERE c.id = :crewId", Crew.class)
+                .setParameter("crewId", crewId)
+                .uniqueResult();
+    }
 }

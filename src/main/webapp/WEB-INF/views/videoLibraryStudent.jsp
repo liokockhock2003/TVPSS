@@ -19,7 +19,9 @@
 }
 
 body {
-	background-color: #f9f9f9;
+	display: flex;
+	min-height: 100vh;
+	background-color: #f5f5f5;
 }
 
 .container {
@@ -77,7 +79,6 @@ body {
 	color: white;
 }
 
-/* Main Content Styles */
 .main-content {
 	flex: 1;
 	padding: 20px;

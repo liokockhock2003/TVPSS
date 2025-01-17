@@ -319,10 +319,8 @@ to {
 			<div class="profile-header mb-4">
 				<img src="https://via.placeholder.com/120" alt="School Logo">
 				<div>
-					<h4>SK TAMAN BUKIT DAHLIA</h4>
-					<p class="mb-0">
-						JB 3003<br>Jalan Permas Dalam<br>Johor Bahru
-					</p>
+					<h4>${school.name}</h4>
+					<p class="mb-0">${school.address}</p>
 				</div>
 			</div>
 
@@ -330,12 +328,18 @@ to {
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item"><a class="nav-link active"
-							href="manage-school">List of Crew</a></li>
-						<li class="nav-item"><a class="nav-link" href="resource-page"">List
+							href="./${schoolId}">List of Crew</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/manage-school/resource-page/${schoolId}">List
 								of Resource</a></li>
 					</ul>
 				</div>
 				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<a
+							href="${pageContext.request.contextPath}/manage-school/add-crew/${schoolId}"
+							class="manage-btn"><b>+</b> Add Crew</a>
+					</div>
 					<table class="table table-hover table-striped align-middle">
 						<thead class="table-light">
 							<tr>
@@ -347,37 +351,19 @@ to {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${crewList}" var="crew" varStatus="status">
+							<c:forEach items="${crews}" var="crew" varStatus="status">
 								<tr>
-									<td class="text-center">${status.count}</td>
+									<td class="text-center">${status.count}.</td>
 									<td>${crew.name}</td>
 									<td>${crew.role}</td>
-									<td class="text-center">${crew.allocatedResources}</td>
+									<td class="text-center">${crew.allocatedResourcesCount}</td>
 									<td class="text-center"><a
-										href="${pageContext.request.contextPath}/view-resource?id=${crew.id}"
+										href="${pageContext.request.contextPath}/manage-school/manage-crew-resource/${crew.id}"
 										class="manage-btn">View Resource</a> <a
-										href="${pageContext.request.contextPath}/add-resource?id=${crew.id}"
+										href="${pageContext.request.contextPath}/manage-school/allocate-resource/${crew.id}"
 										class="manage-btn">Add Resource</a></td>
 								</tr>
 							</c:forEach>
-
-							<!-- Sample static rows (remove when using real data) -->
-							<tr>
-								<td class="text-center">1.</td>
-								<td>Daniel Syafiq</td>
-								<td>Cameraman</td>
-								<td class="text-center">1</td>
-								<td class="text-center"><a href="#" class="manage-btn">View
-										Resource</a> <a href="#" class="manage-btn">Add Resource</a></td>
-							</tr>
-							<tr>
-								<td class="text-center">2.</td>
-								<td>Daniel Hakim</td>
-								<td>Cameraman</td>
-								<td class="text-center">2</td>
-								<td class="text-center"><a href="#" class="manage-btn">View
-										Resource</a> <a href="#" class="manage-btn">Add Resource</a></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>

@@ -19,7 +19,9 @@
 }
 
 body {
-	background-color: #f9f9f9;
+	display: flex;
+	min-height: 100vh;
+	background-color: #f5f5f5;
 }
 
 .container {
@@ -42,7 +44,6 @@ body {
 	color: #9c27b0; /* Optional hover effect for logo */
 }
 
-/* Main Content Styles */
 .main-content {
 	flex: 1;
 	padding: 20px;

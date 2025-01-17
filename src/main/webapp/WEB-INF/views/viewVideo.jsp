@@ -413,7 +413,7 @@ video::-webkit-media-controls {
 			<div class="channel-info">
 				<div class="channel-avatar"></div>
 				<div class="channel-details">
-					<div class="channel-name">${user.username}</div>
+					<div class="channel-name">${teacher.name}</div>
 				</div>
 			</div>
 
@@ -437,7 +437,6 @@ video::-webkit-media-controls {
 				<button id="submit-comment-btn">Submit</button>
 			</div>
 
-			<!-- Comments Container -->
 			<!-- Comments Container -->
 			<div id="comments-container">
 				<div class="comments-header">
