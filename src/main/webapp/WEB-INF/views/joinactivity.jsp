@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Join Activity - TVPSS</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -128,21 +130,34 @@ body {
 			<h4 class="mb-4">Activity</h4>
 
 			<div class="form-container">
-				<!-- Add Image Above Form -->
-				<img src="https://one-hbs.com/wp-content/uploads/2021/11/250356943_2021610551339967_5516846616685059832_n.jpg" alt="Activity Banner"
-					class="img-fluid mb-3" style="width: 80%; height: auto; margin: 0 auto; display: block;">
+				<c:if test="${not empty error}">
+					<div class="alert alert-danger">${error}</div>
+				</c:if>
 
-				<form action="submitReport.jsp" method="post"
-					enctype="multipart/form-data">
-					<label for="title">Name (required)</label> <input type="text"
-						id="title" name="title" required> <label for="number">Age
-						(required)</label> <input type="number" id="age" name="age" required>
+				<c:if test="${!activity.hasCapacity()}">
+					<div class="alert alert-warning">This activity is currently
+						full (${activity.maxParticipants}/${activity.maxParticipants}
+						participants).</div>
+				</c:if>
 
-					<label for="title">School (required)</label> <input type="text"
-						id="title" name="title" required>
+				<form
+					action="${pageContext.request.contextPath}/activities/join/${activityId}"
+					method="post"
+					<c:if test="${!activity.hasCapacity()}">style="display: none;"</c:if>>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" /> <label for="name">Name:</label> <input
+						type="text" id="name" name="name" required> <label
+						for="age">Age:</label> <input type="number" id="age" name="age"
+						required> <label for="school">School:</label> <input
+						type="text" id="school" name="school" required> <label
+						for="icNumber">IC Number:</label> <input type="text" id="icNumber"
+						name="icNumber" required>
 
-					<button type="submit">Join</button>
+					<button type="submit">Join Activity</button>
 				</form>
+
+
+
 			</div>
 
 		</div>
