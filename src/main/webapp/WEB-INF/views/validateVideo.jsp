@@ -135,6 +135,107 @@ header {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Video preview styling */
+.video-preview {
+    position: relative;
+    width: 160px;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Video details styling */
+.video-description {
+    margin-top: 8px;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 400px;
+}
+
+/* Adjust video details container for description */
+.video-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 16px; /* Add some spacing from action buttons */
+}
+
+.video-title {
+    font-weight: 500;
+    color: #1f2937;
+    font-size: 15px;
+}
+
+.meta-info {
+    display: flex;
+    gap: 8px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.meta-info span:not(:last-child):after {
+    content: "•";
+    margin-left: 8px;
+}
+
+/* Button styling */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-approve {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+}
+
+.btn-approve:hover {
+    background-color: #16a34a;
+}
+
+.btn-reject {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+}
+
+.btn-reject:hover {
+    background-color: #dc2626;
+}
+
 .video-validation h2 {
 	margin-bottom: 20px;
 }
@@ -236,6 +337,7 @@ button:disabled {
 						<th>No</th>
 						<th>Video</th>
 						<th>Details</th>
+						<th>Description</th>
 						<th>Action</th>
 					</tr>
 				</table>

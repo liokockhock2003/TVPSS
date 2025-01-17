@@ -1,0 +1,92 @@
+/* Header container with just enough space for content */
+.header-container {
+    background-color: #9c27b0;
+    background: linear-gradient(to right, #9c27b0, #9d46ff);
+    padding: 0.7rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(98, 0, 234, 0.3);
+    width: fit-content;  /* This makes the container fit its content exactly */
+    display: inline-block;  /* This ensures the container doesn't stretch full width */
+    border-radius: 4px;  /* Optional: adds slightly rounded corners */
+    margin-bottom: 40px;
+}
+
+/* Left-aligned user section with comfortable spacing */
+.user-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;  /* Increased spacing between elements */
+}
+
+/* User information with enhanced visibility */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;  /* Pure white for maximum contrast */
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Larger, more prominent username */
+.user-name {
+    font-weight: 600;
+    font-size: 1.25rem;  /* Significantly larger font */
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+/* Role with improved contrast */
+.user-role {
+    color: #e0bcff;  /* Lighter purple for better contrast */
+    font-size: 1.1rem;  /* Larger font size */
+    font-weight: 500;  /* Slightly bolder */
+}
+
+/* Bold, contrasting logout button */
+.logout-button {
+    padding: 0.5rem 1.2rem;
+    background-color: #ff4081;  /* Contrasting pink color */
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 1.1rem;  /* Larger font size */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced hover effect with contrasting color */
+.logout-button:hover {
+    background-color: #f50057;  /* Darker pink on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Responsive adjustments while maintaining larger fonts */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0.6rem 1rem;
+    }
+
+    .user-section {
+        gap: 1.2rem;
+    }
+
+    .user-name {
+        font-size: 1.15rem;
+    }
+
+    .user-role {
+        font-size: 1rem;
+    }
+    
+    .logout-button {
+        padding: 0.4rem 1rem;
+        font-size: 1rem;
+    }
+}

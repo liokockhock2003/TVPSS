@@ -141,6 +141,76 @@ header {
 	margin-bottom: 20px;
 }
 
+/* Video preview container */
+.video-preview {
+    position: relative;
+    width: 160px;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Video info styles */
+.video-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.video-title {
+    font-weight: 500;
+    color: #1f2937;
+    font-size: 15px;
+}
+
+.video-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.video-meta span:not(:last-child):after {
+    content: "•";
+    margin-left: 8px;
+}
+
+/* Stttus button */
+.btn-approve {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: default;
+    text-transform: capitalize;
+}
+
+/* Status colors */
+.btn-approve[disabled] {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
 table {
 	width: 100%;
 	border-collapse: collapse;
@@ -239,6 +309,7 @@ button:disabled {
 							<th>No</th>
 							<th>Video</th>
 							<th>Details</th>
+							<th>Description</th>
 							<th>Action</th>
 						</tr>
 					</thead>

@@ -33,6 +33,17 @@ public class StudentDao {
     }
     
     @Transactional
+    public Student getStudentByUserId(int userId) {
+        return getCurrentSession()
+                .createQuery("SELECT s FROM Student s "
+                           + "JOIN FETCH s.user u "
+                           + "JOIN FETCH s.school "
+                           + "WHERE s.user.id = :userId", Student.class)
+                .setParameter("userId", userId)
+                .uniqueResult();
+    }
+    
+    @Transactional
     @SuppressWarnings("unchecked")
     public List<Student> getAllStudents() {
         return getCurrentSession().createQuery("from Student").list();

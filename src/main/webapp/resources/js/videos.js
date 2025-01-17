@@ -26,15 +26,22 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span>${video.duration}</span>
                         </div>
                     </td>
-                    <td>
-                        <span class="video-title">${video.title}</span>
-                        <div class="edit-form" style="display: none;">
-                            <input type="text" class="title-input" value="${video.title}">
-                            <textarea class="description-input">${video.description}</textarea>
-                            <button class="save-btn">Save</button>
-                            <button class="cancel-btn">Cancel</button>
-                        </div>
-                    </td>
+					<td>
+					    <div class="video-info">
+					        <span class="video-title">${video.title}</span>
+					        <p class="video-description">${video.description || 'No description'}</p>
+					        <div class="edit-form" style="display: none;">
+								<label>Title</label>
+					            <input type="text" class="title-input" value="${video.title}" placeholder="Enter title">
+								<label>Description</label>
+					            <textarea class="description-input" placeholder="Enter description">${video.description || ''}</textarea>
+					            <div class="form-buttons">
+					                <button class="save-btn">Save</button>
+					                <button class="cancel-btn">Cancel</button>
+					            </div>
+					        </div>
+					    </div>
+					</td>
                     <td><span class="status-badge status-${video.status.toLowerCase()}">${video.status}</span></td>
                     <td>
                         <div class="action-buttons">
@@ -51,10 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
 					const saveBtn = row.querySelector('.save-btn');
 					const cancelBtn = row.querySelector('.cancel-btn');
 					const videoTitle = row.querySelector('.video-title');
+					const videoDescription = row.querySelector('.video-description');
 
 					// Edit button click handler
 					editBtn.addEventListener('click', () => {
 						videoTitle.style.display = 'none';
+						videoDescription.style.display = 'none';
 						editForm.style.display = 'block';
 					});
 
@@ -110,8 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			.then(updatedVideo => {
 				// Update the UI
 				row.querySelector('.video-title').textContent = updatedVideo.title;
+				row.querySelector('.video-description').textContent = updatedVideo.description;
 				row.querySelector('.edit-form').style.display = 'none';
 				row.querySelector('.video-title').style.display = 'block';
+				row.querySelector('.video-description').style.display = 'block';
 
 				// Show success message
 				showNotification('Video updated successfully');
