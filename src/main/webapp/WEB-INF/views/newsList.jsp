@@ -270,14 +270,7 @@ h4 {
 		<jsp:include page="/WEB-INF/views/sidebar/sidebarTeacher.jsp" />
 
 		<div class="main-content">
-			<!-- User Section -->
-			<div class="user-section">
-				<div class="user-avatar"></div>
-				<span>Katie Pena (Admin)</span>
-			</div>
-
-			<!-- Search Bar -->
-			<input type="text" class="search-bar" placeholder="Search...">
+			<jsp:include page="/WEB-INF/views/header/header.jsp" />
 
 			<div class="d-flex justify-content-between align-items-center mb-4">
 				<h4>News List</h4>

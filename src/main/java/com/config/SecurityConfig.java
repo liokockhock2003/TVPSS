@@ -79,6 +79,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/school-list").hasRole("ADMIN")
                         .antMatchers("/school-profile").hasRole("ADMIN")
                         .antMatchers("/school-review").hasRole("ADMIN")
+                        .antMatchers("/add-school").hasRole("ADMIN")
+                        .antMatchers("/add-school").hasRole("ADMIN")
+                        .antMatchers("/delete-school/**").hasRole("ADMIN")
                         .antMatchers("/resources/**", "/css/**", "/js/**").permitAll()
                         .antMatchers("/register").permitAll()
                         .anyRequest().authenticated())
@@ -108,17 +111,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             switch (role) {
                               case "STUDENT":
                                 	request.getSession().setAttribute("name", studentDao.getStudentByUserId(user.getId()).getName());
-                                    response.sendRedirect("http://localhost:8080/TVPSS-1/student-library-student");
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/activities/student-dashboard");
                                     break;
                                 case "TEACHER":
                                 	request.getSession().setAttribute("name", teacherDao.getTeacherByUserId(user.getId()).getName());
                                     response.sendRedirect("http://localhost:8080/TVPSS-1/dashboard");
                                     break;
                                 case "ADMIN":
-                                    response.sendRedirect("http://localhost:8080/TVPSS-1/validate-video");
+                                    response.sendRedirect("http://localhost:8080/TVPSS-1/crew-resource");
                                     break;
                                 default:
-                                    response.sendRedirect("/"); // Redirect to a default page if no role is matched
+                                    response.sendRedirect("/logout"); // Redirect to a default page if no role is matched
                                     break;
                             }
                         })
@@ -133,8 +136,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll())   
                 .csrf(csrf -> csrf
                         .ignoringAntMatchers("/videos/upload")
-                        .ignoringAntMatchers("/updateSubmission"));
-                        .ignoringAntMatchers("/news/add"));
+                        .ignoringAntMatchers("/updateSubmission")
+                        .ignoringAntMatchers("/news/add")
+                        .ignoringAntMatchers("/add-school")
+                        .ignoringAntMatchers("/delete-school/**")
+                        .ignoringAntMatchers("/school-list"));
+        
 
     }
 }

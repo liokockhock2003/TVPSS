@@ -22,7 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${index + 1}</td>
                     <td>
                         <div class="video-preview">
-                            <img src="${video.thumbnail}" alt="Video thumbnail" class="thumbnail" />
+							<a href="videos/previewVideo?videoId=${video.id}" class="thumbnail-link">
+					            <img src="${video.thumbnail}"
+					                class="video-thumbnail"
+					                alt="Video"
+					                onerror="this.src='https://via.placeholder.com/200x120'">
+						        </a>
                             <span>${video.duration}</span>
                         </div>
                     </td>

@@ -247,15 +247,7 @@ h4 strong {
 
 		<!-- Main Content -->
 		<div class="main-content">
-			<!-- User Section -->
-			<div class="user-section">
-				<div class="user-avatar"></div>
-				<span>Katie Pena (Admin)</span>
-			</div>
-
-			<!-- Search Bar -->
-			<input id="searchInput" type="text" class="search-bar"
-				placeholder="Search participants..." onkeyup="filterTable()">
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 
 			<!-- Participants Table -->
 			<h4 class="mb-4">Participants List</h4>

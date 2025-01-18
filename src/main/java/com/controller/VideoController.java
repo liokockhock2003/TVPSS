@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
@@ -385,6 +386,19 @@ public class VideoController {
 	    
 	    
         return ResponseEntity.ok(videoMaps);
+    }
+    
+    @GetMapping("/previewVideo")
+    public ModelAndView previewVideo(@RequestParam int videoId) {
+        ModelAndView modelAndView = new ModelAndView("previewVideo");
+        
+        // Get video details from your service
+        Video video = videoService.getVideoById(videoId);
+        
+        // Add video information to the model
+        modelAndView.addObject("video", video);
+        
+        return modelAndView;
     }
 
 

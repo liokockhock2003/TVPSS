@@ -30,6 +30,7 @@ public class ActivityController {
 			List<Activity> activities = activityService.getAllActivities();
 			ModelAndView modelAndView = new ModelAndView("dashboard");
 			modelAndView.addObject("activities", activities);
+			modelAndView.addObject("currentPage", "dashboard");
 			return modelAndView;
 		} catch (Exception e) {
 			logger.error("Error fetching activities: ", e);
@@ -154,6 +155,7 @@ public class ActivityController {
 		try {
 			List<Activity> activities = activityService.getAllActivities();
 			modelAndView.addObject("activities", activities);
+			modelAndView.addObject("currentPage", "dashboard");
 		} catch (Exception e) {
 			modelAndView.addObject("error", "Failed to load activities: " + e.getMessage());
 		}

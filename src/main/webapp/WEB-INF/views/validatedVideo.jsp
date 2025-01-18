@@ -281,14 +281,7 @@ button:disabled {
 
 		<!-- Main Content -->
 		<div class="main-content">
-			<!-- Header -->
-			<header>
-				<input type="text" placeholder="Search..." class="search-bar">
-				<div class="user-profile">
-					<img src="https://via.placeholder.com/40" alt="User"> <span>Katie
-						Pena (Admin)</span>
-				</div>
-			</header>
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">

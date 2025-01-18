@@ -486,15 +486,7 @@ video::-webkit-media-controls {
 	</sec:authorize>
 
 	<div class="main-content">
-		<div class="header">
-			<div class="search-bar">
-				<input type="text" placeholder="Search...">
-			</div>
-			<div class="user-info">
-				<span>Katie Pena</span>
-				<div class="user-avatar"></div>
-			</div>
-		</div>
+		<jsp:include page="/WEB-INF/views/header/header.jsp" />
 
 		<div class="video-container">
 			<div class="video-container">

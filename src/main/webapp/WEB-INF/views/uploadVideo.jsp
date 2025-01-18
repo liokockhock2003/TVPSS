@@ -422,6 +422,36 @@ td {
         width: 100%;
         text-align: center;
     }
+    
+}
+
+.thumbnail-link {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.thumbnail-link:hover {
+    transform: scale(1.05);
+}
+
+.video-thumbnail {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 12px;
 }
 </style>
 </head>
@@ -430,16 +460,7 @@ td {
 
 	<div class="main-content">
 		<div class="content-left">
-			<div class="header">
-				<div class="search">
-					<input type="text" placeholder="Search..."
-						style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-				</div>
-				<div class="user-info">
-					<span>Admin</span>
-					<div class="user-avatar"></div>
-				</div>
-			</div>
+			<jsp:include page="/WEB-INF/views/header/header.jsp" />
 
 			<form method="post"
 				action="${pageContext.request.contextPath}/videos/upload"

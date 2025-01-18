@@ -301,6 +301,36 @@ button:disabled {
 .btn:hover {
 	opacity: 0.8;
 }
+
+/*thumbnail style*/
+.thumbnail-link {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.thumbnail-link:hover {
+    transform: scale(1.05);
+}
+
+.video-thumbnail {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 12px;
+}
 </style>
 </head>
 <body>
@@ -310,14 +340,7 @@ button:disabled {
 
 		<!-- Main Content -->
 		<div class="main-content">
-			<!-- Header -->
-			<header>
-				<input type="text" placeholder="Search..." class="search-bar">
-				<div class="user-profile">
-					<img src="https://via.placeholder.com/40" alt="User"> <span>Katie
-						Pena (Admin)</span>
-				</div>
-			</header>
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 
 			<div class="card-header">
 				<ul class="nav nav-tabs card-header-tabs">

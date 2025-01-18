@@ -214,14 +214,7 @@ body {
 
 		<!-- Main Content -->
 		<div class="main-content">
-			<!-- User Section -->
-			<div class="user-section">
-				<div class="user-avatar"></div>
-				<span>Katie Pena (Student)</span>
-			</div>
-
-			<!-- Search Bar -->
-			<input type="text" class="search-bar" placeholder="Search...">
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 
 			<div class="table-container">
 				<h4 class="mb-4">Student Dashboard</h4>

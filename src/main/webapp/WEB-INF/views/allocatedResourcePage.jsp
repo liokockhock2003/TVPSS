@@ -132,11 +132,7 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- User Section -->
-            <div class="user-section">
-                <div class="user-avatar"></div>
-                <span>Katie Pena (Admin)</span>
-            </div>
+            <jsp:include page="/WEB-INF/views/header/header.jsp"/>
 
             <div class="back-btn">
                 <a href="${pageContext.request.contextPath}/manage-school/crew-page/${schoolId}" class="manage-btn">

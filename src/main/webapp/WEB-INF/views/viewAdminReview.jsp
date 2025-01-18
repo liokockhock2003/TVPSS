@@ -229,6 +229,7 @@ body {
 
 		<!-- Main Content -->
 		<div class="main-content">
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 			<!-- User Section (exactly the same as previous page) -->
 			<div class="user-section">
 				<div class="user-avatar"></div>

@@ -220,14 +220,7 @@ h4 {
 		<jsp:include page="/WEB-INF/views/sidebar/sidebarStudent.jsp" />
 
 		<div class="main-content">
-			<!-- User Section -->
-			<div class="user-section">
-				<div class="user-avatar"></div>
-				<span>Katie Pena (Admin)</span>
-			</div>
-
-			<!-- Search Bar -->
-			<input type="text" class="search-bar" placeholder="Search...">
+			<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 			<h4>News List</h4>
 
 			<div class="content-card">

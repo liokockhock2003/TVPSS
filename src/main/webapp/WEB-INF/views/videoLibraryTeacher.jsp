@@ -261,7 +261,7 @@ body {
 
 		<!-- Main Content -->
 		<div class="main-content">
-			<jsp:include page="/WEB-INF/views/header/headerTeacher.jsp" />
+			<jsp:include page="/WEB-INF/views/header/header.jsp" />
 
 			<!-- Upload Section -->
 			<div class="upload-section">
