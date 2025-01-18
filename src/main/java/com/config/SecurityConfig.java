@@ -60,10 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/joinactivity").hasRole("STUDENT") //nanti tukar jadi STUDENT
                         .antMatchers("/view-video").hasAnyRole("STUDENT", "TEACHER")
                         .antMatchers("/forum").hasAnyRole("STUDENT", "TEACHER")
-                        .antMatchers(HttpMethod.GET, "/news/add").hasRole("TEACHER")
-                        .antMatchers("/news/add-news").hasRole("TEACHER")
-                        .antMatchers("/news/edit/**", "/news/delete/**").hasRole("TEACHER")
-                        .antMatchers("/news/**").hasAnyRole("STUDENT", "TEACHER")
+                        .antMatchers(HttpMethod.GET, "/news/add").hasAnyRole("TEACHER","ADMIN")
+                        .antMatchers("/news/add-news").hasAnyRole("TEACHER","ADMIN")
+                        .antMatchers("/news/edit/**", "/news/delete/**").hasAnyRole("TEACHER","ADMIN")
+                        .antMatchers("/news/**").hasAnyRole("STUDENT","TEACHER","ADMIN")
                         .antMatchers("/video-upload").hasRole("TEACHER")
                         .antMatchers("/video-library-teacher").hasRole("TEACHER")
                         .antMatchers("/school-submission").hasRole("TEACHER")
@@ -141,7 +141,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .ignoringAntMatchers("/add-school")
                         .ignoringAntMatchers("/delete-school/**")
                         .ignoringAntMatchers("/school-list"));
-        
+
 
     }
 }

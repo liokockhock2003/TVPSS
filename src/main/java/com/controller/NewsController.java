@@ -36,6 +36,14 @@ public class NewsController {
         return modelAndView;
     }
     
+    @GetMapping("/admin")
+    public ModelAndView listNewsAdmin() {
+        List<News> newsList = newsService.getAllNews();
+        ModelAndView modelAndView = new ModelAndView("viewNewsAdmin");
+        modelAndView.addObject("newsList", newsList);
+        return modelAndView;
+    }
+    
     @GetMapping("/student")
     public ModelAndView listNewsStudent() {
         List<News> newsList = newsService.getAllNews();
