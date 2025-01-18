@@ -16,4 +16,8 @@
         class="nav-item ${currentPage == 'viewSchoolList' ? 'active' : ''}">
         <span>🎥 School List</span>
     </a>
+    <a href="${pageContext.request.contextPath}/news/admin"
+		 class="nav-item ${currentPage == 'viewNewsAdmin' ? 'active' : ''}">
+        <span>👥 News</span>
+    </a>
 </div>
