@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS School List</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -97,15 +99,12 @@ body {
 .table td {
 	vertical-align: middle;
 }
-
-
 </style>
 </head>
 <body>
 	<div class="main-container">
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/sidebar/sidebarAdmin.jsp" />
-
 
 		<!-- Main Content -->
 		<div class="main-content">
@@ -119,12 +118,12 @@ body {
 			<input type="text" class="search-bar" placeholder="Search...">
 
 			<div class="content-card">
-				<h6 class="mb-4">List of School</h6>
+				<h6 class="mb-4">List of Schools</h6>
 
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Code</th>
+							<th>No</th>
 							<th>School Name</th>
 							<th>Version</th>
 							<th>Status</th>
@@ -132,37 +131,27 @@ body {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${schools}" var="school" varStatus="status">
+						<!-- Loop through the schools and display them -->
+						<c:forEach items="${schools}" var="school">
 							<tr>
-								<td>${status.code}</td>
+								<td>${school.id}</td>
 								<td>${school.name}</td>
 								<td>${school.version}</td>
-								<td>${school.status}</td>
 								<td>
-									<button class="manage-btn">View Details</button>
+									<!-- Display 'Active' or 'Not Active' based on status --> <c:choose>
+										<c:when test="${school.status == true}">Active</c:when>
+										<c:otherwise>Not Active</c:otherwise>
+									</c:choose>
+								</td>
+								<td>
+									<!-- Button that links to the school profile page based on school ID -->
+									<a
+									href="${pageContext.request.contextPath}/school-profile/${school.id}"
+									class="manage-btn"> View Details </a>
 								</td>
 							</tr>
-						</c:forEach>
 
-						<!-- Sample data (remove when using real data) -->
-						<tr>
-							<td>JB3003</td>
-							<td>Sekolah Kebangsaan Taman Bukit Dahlia</td>
-							<td>Version 2</td>
-							<td>Active</td>
-							<td>
-								<button class="manage-btn">View Details</button>
-							</td>
-						</tr>
-						<tr>
-							<td>JB3004</td>
-							<td>Sekolah Kebangsaan Taman Cendana</td>
-							<td>-</td>
-							<td>Not Active</td>
-							<td>
-								<button class="manage-btn">View Details</button>
-							</td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

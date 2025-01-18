@@ -38,42 +38,6 @@ body {
 	color: #9c27b0; /* Optional hover effect for logo */
 }
 
-/* Sidebar styles */
-.sidebar {
-	width: 300px; /* Increased width */
-	background-color: white;
-	padding: 20px;
-	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.nav-item {
-	padding: 15px 16px;
-	margin: 4px 0;
-	border-radius: 8px;
-	color: #666;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	transition: all 0.3s ease;
-	font-size: 22px;
-	text-decoration: none; /* Added for links */
-}
-
-.nav-item:hover {
-	padding: 10px;
-	background-color: #e1bee7; /* Light purple highlight */
-	color: #9c27b0; /* Purple text */
-}
-
-.nav-item.active {
-	background-color: #9c27b0;
-	color: white;
-}
-
-.nav-item.active:hover {
-	color: white;
-}
-
 /* Main Content Styles */
 .main-content {
 	flex: 1;
@@ -128,9 +92,12 @@ body {
 
 .form-group {
 	margin-bottom: 20px;
+	font-size: 17px;
+	font-weight: 600;
 }
 
 input[type="text"], textarea {
+	font-size: 14px;
 	width: 100%;
 	padding: 12px;
 	border: 1px solid #ddd;
@@ -139,6 +106,8 @@ input[type="text"], textarea {
 }
 
 .upload-btn {
+	font-size: 14px;
+	font-weight: 500;
 	background-color: #7c3aed;
 	color: white;
 	padding: 12px 24px;
@@ -264,6 +233,196 @@ input[type="text"], textarea {
 .file-input {
 	display: none;
 }
+
+/* Table Row Styles */
+tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+}
+
+tr:hover {
+    background-color: #f8fafc;
+}
+
+td {
+    padding: 16px;
+    vertical-align: middle;
+}
+
+/* Video Preview Styles */
+.video-preview {
+    position: relative;
+    width: 160px;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-preview img.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-preview span {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Title and Edit Form Styles */
+.video-title {
+    font-weight: 500;
+    color: #1f2937;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.edit-form {
+    margin-top: 12px;
+    padding: 16px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.title-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.description-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    min-height: 80px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+.title-input:focus,
+.description-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.status-published {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-draft {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.status-processing {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.status-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Button Styles */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-btn {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.edit-btn:hover {
+    background-color: #dbeafe;
+}
+
+.delete-btn {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.delete-btn:hover {
+    background-color: #fee2e2;
+}
+
+.save-btn {
+    background-color: #166534;
+    color: white;
+    border: none;
+}
+
+.save-btn:hover {
+    background-color: #15803d;
+}
+
+.cancel-btn {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+
+.cancel-btn:hover {
+   	background-color: #e5e7eb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .video-preview {
+        width: 120px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
 </style>
 </head>
 <body>
@@ -305,8 +464,6 @@ input[type="text"], textarea {
 								onclick="document.getElementById('fileInput').click()">
 								<div class="upload-icon">📁</div>
 								<p>Drag & drop video file here</p>
-								<p style="color: #666; font-size: 14px; margin-top: 10px;">or</p>
-								<button class="browse-btn">Browse Files</button>
 							</div>
 							<input type="file" name="file" id="fileInput" class="file-input"
 								accept="video/*">

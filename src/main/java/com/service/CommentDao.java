@@ -51,9 +51,29 @@ public class CommentDao {
                 .setParameter("userId", userId)
                 .getResultList();
     }
+    
+    // Get all userIds who commented on a video
+    public List<Integer> getAllUserIdsByVideoId(int videoId) {
+        String hql = "SELECT DISTINCT c.userId FROM Comment c WHERE c.videoId = :videoId";
+        return entityManager.createQuery(hql, Integer.class)
+                .setParameter("videoId", videoId)
+                .getResultList();
+    }
 
     // Get a specific comment by ID
     public Comment getCommentById(int commentId) {
         return entityManager.find(Comment.class, commentId);
+    }
+    
+    // Get all comments for a specific video with usernames
+    public List<Object[]> getCommentsByVideoId2(int videoId) {
+        String hql = "SELECT c, u.username FROM Comment c " +
+                    "JOIN Users u ON c.userId = u.id " +
+                    "WHERE c.videoId = :videoId " +
+                    "ORDER BY c.id DESC";
+        
+        return entityManager.createQuery(hql)
+                .setParameter("videoId", videoId)
+                .getResultList();
     }
 }
