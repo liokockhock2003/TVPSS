@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>TVPSS School Status Submission</title>
-<link href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/SideBarStyles.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <style>
-
 body {
 	background-color: #f8f9fa;
 }
@@ -248,16 +249,14 @@ body {
 							alt="School Logo">
 					</div>
 					<div class="school-info">
-						<h1>SK TAMAN BUKIT DAHLIA</h1>
-						<p class="school-code">JB 3003</p>
-						<p class="school-address">Persiaran Dahlia 1</p>
-						<p class="school-location">81700 Pasir Gudang</p>
-						<p class="school-state">Johor</p>
+						<h1>${school.name}</h1>
+						<p class="school-address">${school.address}</p>
 					</div>
 				</div>
 
-				<!-- TVPSS Status Submission Form -->
-				<form id="tvpssStatusForm" enctype="multipart/form-data">
+				<!-- TVPSS Status Form -->
+				<form action="${pageContext.request.contextPath}/updateSubmission"
+					method="POST" enctype="multipart/form-data">
 					<div class="criteria-table">
 						<table>
 							<thead>
@@ -265,160 +264,46 @@ body {
 									<th>No.</th>
 									<th>Criteria</th>
 									<th>Status</th>
-									<th>Proof Upload</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>There is a Name (Brand)</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria1" id="criteria1"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof1"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Logo</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria2" id="criteria2"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof2"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Corner / Mini Studio / TV Studio</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria3" id="criteria3"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof3"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>In-School Recording</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria4" id="criteria4"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof4"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>Upload on Youtube</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria5" id="criteria5"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof5"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td>Recording inside and outside the school</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria6" id="criteria6"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof6"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>7</td>
-									<td>Collabirate with external agencies</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria7" id="criteria7"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof7"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
-								<tr>
-									<td>8</td>
-									<td>Using 'Green Screen' Technology</td>
-									<td class="check-column"><input type="checkbox"
-										name="criteria8" id="criteria8"> <span
-										class="status-pill pending">Pending</span></td>
-									<td class="proof-upload"><input type="file" name="proof8"
-										accept="image/*"> <img class="proof-preview" src=""
-										style="display: none;"></td>
-								</tr>
+								<c:forEach var="criteriaStatus" items="${tvpssStatuses}">
+									<tr>
+										<!-- Hidden Input for id -->
+										<input type="hidden" name="id${criteriaStatus.id}"
+											value="${criteriaStatus.id}" />
+
+										<td>${criteriaStatus.id}</td>
+										<td>${criteriaStatus.criteriaName}</td>
+
+										<!-- Status Info Column -->
+										<td><span
+											class="status-pill ${criteriaStatus.status.toLowerCase()}">
+												${criteriaStatus.status} </span></td>
+
+										<!-- Upload Image Column -->
+										<td class="upload-column"><input type="file"
+											name="proofImage${criteriaStatus.id}"></td>
+
+
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-
+					<input type="hidden" id="csrf-token" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<!-- Single Submit Button -->
 					<div class="submit-section">
 						<button type="submit" class="btn btn-primary">Submit for
 							Approval</button>
 					</div>
 				</form>
+
 			</div>
 		</div>
 	</div>
-
-	<script>
-	document.addEventListener('DOMContentLoaded', function() {
-        // Image preview functionality
-        const fileInputs = document.querySelectorAll('input[type="file"]');
-        fileInputs.forEach(input => {
-            input.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                const previewImg = this.nextElementSibling;
-                
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
-                        previewImg.style.display = 'block';
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    previewImg.src = '';
-                    previewImg.style.display = 'none';
-                }
-            });
-        });
-
-        // Form submission
-        const form = document.getElementById('tvpssStatusForm');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Validation: Ensure checkbox is checked when uploading proof
-            const rows = form.querySelectorAll('tbody tr');
-            let isValid = true;
-
-            rows.forEach(row => {
-                const checkbox = row.querySelector('input[type="checkbox"]');
-                const fileInput = row.querySelector('input[type="file"]');
-                const statusPill = row.querySelector('.status-pill');
-
-                if (fileInput.files.length > 0 && !checkbox.checked) {
-                    isValid = false;
-                    alert('Please check the box before uploading proof');
-                    return;
-                }
-
-                if (checkbox.checked) {
-                    statusPill.textContent = 'Pending';
-                    statusPill.classList.remove('approved', 'rejected');
-                    statusPill.classList.add('pending');
-                }
-            });
-
-            if (isValid) {
-                // Here you would typically send the form data to the server
-                alert('Submitted for Admin Approval');
-            }
-        });
-    });
-	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
